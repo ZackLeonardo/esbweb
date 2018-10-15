@@ -12,7 +12,7 @@ import Layout from "./Layout";
 import Menu from "./Menu";
 import { Dashboard } from "./dashboard";
 import customRoutes from "./routes";
-import englishMessages from "./i18n/en";
+import chineseMessages from "./i18n/zh";
 
 import {
   VisitorList,
@@ -38,8 +38,12 @@ const i18nProvider = locale => {
     return import("./i18n/fr").then(messages => messages.default);
   }
 
+  if (locale === "en") {
+    return import("./i18n/en").then(messages => messages.default);
+  }
+
   // Always fallback on english
-  return englishMessages;
+  return chineseMessages;
 };
 
 class App extends Component {
@@ -84,7 +88,7 @@ class App extends Component {
         loginPage={Login}
         appLayout={Layout}
         menu={Menu}
-        locale="en"
+        locale="zh"
         i18nProvider={i18nProvider}
       >
         <Resource
