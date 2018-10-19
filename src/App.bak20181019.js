@@ -14,7 +14,12 @@ import { Dashboard } from "./dashboard";
 import customRoutes from "./routes";
 import chineseMessages from "./i18n/zh";
 
-import { UserList, UserEdit, UserCreate, UserIcon } from "./users";
+import {
+  VisitorList,
+  VisitorEdit,
+  VisitorCreate,
+  VisitorIcon
+} from "./visitors";
 import { CommandList, CommandEdit, CommandIcon } from "./commands";
 import {
   ProductList,
@@ -25,9 +30,8 @@ import {
 import { CategoryList, CategoryEdit, CategoryIcon } from "./categories";
 import { ReviewList, ReviewEdit, ReviewIcon } from "./reviews";
 
-// import offlineDataProvider from "./dataProvider";
+import offlineDataProvider from "./dataProvider";
 // import dataProviderFactory from "./dataProvider";
-import fakeDataProvider from "ra-data-fakerest";
 
 const i18nProvider = locale => {
   if (locale === "fr") {
@@ -50,39 +54,11 @@ class App extends Component {
     //     process.env.REACT_APP_DATA_PROVIDER
     // );
 
-    // if (process.env.REACT_APP_DATA_PROVIDER === "offline") {
-    //   const dataProvider = offlineDataProvider;
+    if (process.env.REACT_APP_DATA_PROVIDER === "offline") {
+      const dataProvider = offlineDataProvider;
 
-    //   this.setState({ dataProvider });
-    // }
-    const dataProvider = fakeDataProvider({
-      users: [
-        {
-          id: 0,
-          userinfo: "dddddd",
-          username: "zdy",
-          createdate: "2018/09/09 10:00:00",
-          roles: ["sysAdmin"],
-          remarks: "无"
-        },
-        {
-          id: 1,
-          username: "swc",
-          createdate: "2018/09/09 10:00:00",
-          roles: ["sysAdmin", "apiAdmin"]
-        }
-      ],
-      commands: [{ id: 0, title: "Hello, world!" }],
-      products: [{ id: 0, title: "Hello, world!" }],
-      categories: [{ id: 0, title: "Hello, world!" }],
-      reviews: [{ id: 0, title: "Hello, world!" }],
-      posts: [{ id: 0, title: "Hello, world!" }, { id: 1, title: "FooBar" }],
-      comments: [
-        { id: 0, post_id: 0, author: "John Doe", body: "Sensational!" },
-        { id: 1, post_id: 0, author: "Jane Doe", body: "I agree" }
-      ]
-    });
-    this.setState({ dataProvider });
+      this.setState({ dataProvider });
+    }
   }
 
   componentWillUnmount() {
@@ -116,11 +92,37 @@ class App extends Component {
         i18nProvider={i18nProvider}
       >
         <Resource
-          name="users"
-          list={UserList}
-          edit={UserEdit}
-          create={UserCreate}
-          icon={UserIcon}
+          name="customers"
+          list={VisitorList}
+          edit={VisitorEdit}
+          create={VisitorCreate}
+          icon={VisitorIcon}
+        />
+        <Resource
+          name="commands"
+          list={CommandList}
+          edit={CommandEdit}
+          icon={CommandIcon}
+          options={{ label: "Orders" }}
+        />
+        <Resource
+          name="products"
+          list={ProductList}
+          create={ProductCreate}
+          edit={ProductEdit}
+          icon={ProductIcon}
+        />
+        <Resource
+          name="categories"
+          list={CategoryList}
+          edit={CategoryEdit}
+          icon={CategoryIcon}
+        />
+        <Resource
+          name="reviews"
+          list={ReviewList}
+          edit={ReviewEdit}
+          icon={ReviewIcon}
         />
       </Admin>
     );

@@ -6,12 +6,10 @@
     "@material-ui/core": "~1.4.0",
     "@material-ui/icons": "~1.1.0",
     "build": "^0.1.4",
-    "data-generator": "^2.1.4",
-    "fakerest": "~2.1.0",
     "fetch-mock": "~6.3.0",
     "json-graphql-server": "~2.1.1",
     "mime": "^2.3.1",
-    "ra-data-fakerest": "^2.0.0",
+    "ra-data-fakerest": "^2.4.0",
     "ra-data-graphql-simple": "^2.0.0",
     "ra-data-simple-rest": "~2.0.0",
     "ra-input-rich-text": "^2.0.0",
@@ -31,6 +29,7 @@
   "scripts": {
     "build": "lerna run build",
     "run-demo": "export REACT_APP_DATA_PROVIDER=rest && react-scripts start",
+    "run-offline": "export REACT_APP_DATA_PROVIDER=offline && react-scripts start",
     "build-demo": "export REACT_APP_DATA_PROVIDER=rest &&react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

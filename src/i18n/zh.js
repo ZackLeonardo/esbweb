@@ -2,10 +2,12 @@ export default {
   ra: {
     action: {
       delete: "删除",
+      search: "搜索",
       show: "查看",
       list: "列表",
       save: "保存",
       create: "新建",
+      export: "下载",
       edit: "编辑",
       sort: "排序",
       cancel: "取消",
@@ -128,8 +130,29 @@ export default {
     }
   },
   resources: {
-    customers: {
+    users: {
       name: "用户管理",
+      fields: {
+        commands: "Orders",
+        groups: "Segments",
+        last_seen_gte: "Visited Since",
+        name: "Name",
+        total_spent: "Total spent"
+      },
+      tabs: {
+        editInfo: "编辑用户信息",
+        createInfo: "新建用户",
+        address: "Address",
+        orders: "Orders",
+        reviews: "Reviews",
+        stats: "Stats"
+      },
+      page: {
+        delete: "Delete Customer"
+      }
+    },
+    customers: {
+      name: "customers",
       fields: {
         commands: "Orders",
         groups: "Segments",
@@ -221,19 +244,16 @@ export default {
         rejected_error: "Error: Review not rejected"
       }
     },
-    segments: {
-      name: "Segments",
+    roleSegments: {
+      name: "角色",
       fields: {
         customers: "Customers",
         name: "Name"
       },
       data: {
-        compulsive: "Compulsive",
-        collector: "Collector",
-        ordered_once: "Ordered once",
-        regular: "Regular",
-        returns: "Returns",
-        reviewer: "Reviewer"
+        sysAdmin: "系统管理员",
+        apiAdmin: "API管理员",
+        normal: "普通用户"
       }
     }
   }
