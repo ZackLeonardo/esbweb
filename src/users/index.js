@@ -22,6 +22,7 @@ import {
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Person";
+import { CardActions, CreateButton, RefreshButton } from "react-admin";
 
 import NbItemsField from "../commands/NbItemsField";
 import ProductReferenceField from "../products/ProductReferenceField";
@@ -65,12 +66,46 @@ const listStyles = {
   nb_commands: { color: "purple" }
 };
 
+const UserActions = ({
+  bulkActions,
+  basePath,
+  displayedFilters,
+  filters,
+  filterValues,
+  onUnselectItems,
+  resource,
+  selectedIds,
+  showFilter
+}) => (
+  <CardActions>
+    {bulkActions &&
+      React.cloneElement(bulkActions, {
+        basePath,
+        filterValues,
+        resource,
+        selectedIds,
+        onUnselectItems
+      })}
+    {filters &&
+      React.cloneElement(filters, {
+        resource,
+        showFilter,
+        displayedFilters,
+        filterValues,
+        context: "button"
+      })}
+    <CreateButton basePath={basePath} />
+    <RefreshButton />
+  </CardActions>
+);
+
 export const UserList = withStyles(listStyles)(({ classes, ...props }) => (
   <List
     {...props}
     filters={<UserFilter />}
-    sort={{ field: "id", order: "DESC" }}
+    sort={{ field: "userid", order: "DESC" }}
     perPage={25}
+    actions={<UserActions />}
   >
     <Responsive
       xsmall={<MobileGrid />}
