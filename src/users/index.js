@@ -18,11 +18,18 @@ import {
   SearchInput,
   TabbedForm,
   TextField,
-  TextInput
+  TextInput,
+  CardActions,
+  CreateButton,
+  RefreshButton,
+  SimpleForm,
+  SaveButton,
+  Toolbar,
+  Button,
+  Link
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Person";
-import { CardActions, CreateButton, RefreshButton } from "react-admin";
 
 import NbItemsField from "../commands/NbItemsField";
 import ProductReferenceField from "../products/ProductReferenceField";
@@ -33,7 +40,6 @@ import SegmentInput from "./SegmentInput";
 import SegmentsInput from "./SegmentsInput";
 import CustomerLinkField from "./CustomerLinkField";
 import MobileGrid from "./MobileGrid";
-import { Button } from "@material-ui/core";
 
 export const UserIcon = Icon;
 
@@ -146,12 +152,16 @@ const editStyles = {
   }
 };
 
-// const Back = () =>
-//   <Button />;
+const UserEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+    <Button component={Link} to={`/users`} label={"返回"} />
+  </Toolbar>
+);
 
 export const UserEdit = withStyles(editStyles)(({ classes, ...props }) => (
   <Edit title={<UserTitle />} {...props}>
-    <TabbedForm>
+    <TabbedForm toolbar={<UserEditToolbar />}>
       <FormTab label="resources.users.tabs.editInfo">
         <TextInput
           label="用户名"
@@ -168,7 +178,7 @@ export const UserEdit = withStyles(editStyles)(({ classes, ...props }) => (
 
 export const UserCreate = withStyles(editStyles)(({ classes, ...props }) => (
   <Create {...props}>
-    <TabbedForm>
+    <TabbedForm toolbar={<UserEditToolbar />}>
       <FormTab label="resources.users.tabs.createInfo">
         <TextInput
           label="用户名"
