@@ -26,9 +26,9 @@ export default {
     },
     page: {
       list: "%{name}",
-      edit: "%{name} #%{id}",
+      edit: "%{name} 编辑",
       show: "%{name} #%{id}",
-      create: "新建 %{name}",
+      create: "%{name} 新建",
       dashboard: "概览",
       not_found: "未发现",
       loading: "加载中"
@@ -70,7 +70,8 @@ export default {
       page_out_from_begin: "已到最前页",
       page_range_info: "%{offsetBegin}-%{offsetEnd} / %{total}",
       next: "向后",
-      prev: "向前"
+      prev: "向前",
+      page_rows_per_page: "每页行数:"
     },
     auth: {
       user_menu: "个人设置",
@@ -151,6 +152,29 @@ export default {
         delete: "Delete Customer"
       }
     },
+
+    apps: {
+      name: "应用管理",
+      fields: {
+        commands: "Orders",
+        groups: "Segments",
+        last_seen_gte: "Visited Since",
+        name: "Name",
+        total_spent: "Total spent"
+      },
+      tabs: {
+        editInfo: "编辑应用信息",
+        createInfo: "新建用户",
+        address: "Address",
+        orders: "Orders",
+        reviews: "Reviews",
+        stats: "Stats"
+      },
+      page: {
+        delete: "Delete Customer"
+      }
+    },
+
     customers: {
       name: "customers",
       fields: {

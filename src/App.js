@@ -15,6 +15,7 @@ import customRoutes from "./routes";
 import chineseMessages from "./i18n/zh";
 
 import { UserList, UserEdit, UserCreate, UserIcon } from "./users";
+import { AppList, AppEdit, AppCreate, AppIcon } from "./apps";
 import { CommandList, CommandEdit, CommandIcon } from "./commands";
 import {
   ProductList,
@@ -58,7 +59,7 @@ class App extends Component {
     const dataProvider = fakeDataProvider({
       users: [
         {
-          id: 0,
+          userid: 0,
           userinfo: "dddddd",
           username: "zdy",
           createdate: "2018/09/09 10:00:00",
@@ -66,10 +67,26 @@ class App extends Component {
           remarks: "无"
         },
         {
-          id: 1,
+          userid: 1,
           username: "swc",
           createdate: "2018/09/09 10:00:00",
           roles: ["sysAdmin", "apiAdmin"]
+        }
+      ],
+      apps: [
+        {
+          appid: 0,
+          appname: "dddddd",
+          appstatus: "大的",
+          remarks: "无",
+          apimanager: ["zdy"]
+        },
+        {
+          appid: 1,
+          appname: "swc",
+          appstatus: "大的",
+          remarks: "无",
+          apimanager: ["zdy", "swc"]
         }
       ],
       commands: [{ id: 0, title: "Hello, world!" }],
@@ -95,7 +112,7 @@ class App extends Component {
     if (!dataProvider) {
       return (
         <div className="loader-container">
-          <div className="loader">Loading...</div>
+          <div className="loader">加载中...</div>
         </div>
       );
     }
@@ -108,7 +125,6 @@ class App extends Component {
         customSagas={sagas}
         customRoutes={customRoutes}
         authProvider={authProvider}
-        dashboard={Dashboard}
         loginPage={Login}
         appLayout={Layout}
         menu={Menu}
@@ -122,6 +138,7 @@ class App extends Component {
           create={UserCreate}
           icon={UserIcon}
         />
+        <Resource name="apps" list={AppList} edit={AppEdit} icon={AppIcon} />
       </Admin>
     );
   }

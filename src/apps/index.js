@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  BooleanField,
   Create,
   Datagrid,
   DateField,
@@ -19,17 +18,15 @@ import {
   TabbedForm,
   TextField,
   TextInput,
-  CardActions,
-  CreateButton,
-  RefreshButton,
-  SimpleForm,
-  SaveButton,
-  Toolbar,
   Button,
-  Link
+  Link,
+  CardActions,
+  RefreshButton,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Icon from "@material-ui/icons/Person";
+import Icon from "@material-ui/icons/Apps";
 
 import NbItemsField from "../commands/NbItemsField";
 import ProductReferenceField from "../products/ProductReferenceField";
@@ -41,12 +38,11 @@ import SegmentsInput from "./SegmentsInput";
 import CustomerLinkField from "./CustomerLinkField";
 import MobileGrid from "./MobileGrid";
 
-export const UserIcon = Icon;
+export const AppIcon = Icon;
 
-const UserFilter = props => (
+const AppFilter = props => (
   <Filter {...props}>
     <SearchInput source="q" alwaysOn />
-    <SegmentInput alwaysOn />
   </Filter>
 );
 
@@ -72,7 +68,7 @@ const listStyles = {
   nb_commands: { color: "purple" }
 };
 
-const UserActions = ({
+const AppActions = ({
   bulkActions,
   basePath,
   displayedFilters,
@@ -100,33 +96,30 @@ const UserActions = ({
         filterValues,
         context: "button"
       })}
-    <CreateButton basePath={basePath} />
-    <RefreshButton />
+    <RefreshButton label="同步" />
   </CardActions>
 );
 
-export const UserList = withStyles(listStyles)(({ classes, ...props }) => (
+export const AppList = withStyles(listStyles)(({ classes, ...props }) => (
   <List
     {...props}
-    filters={<UserFilter />}
-    sort={{ field: "userid", order: "DESC" }}
+    filters={<AppFilter />}
+    sort={{ field: "id", order: "DESC" }}
     perPage={25}
-    actions={<UserActions />}
+    actions={<AppActions />}
   >
     <Responsive
       xsmall={<MobileGrid />}
       medium={
         <Datagrid>
-          <TextField label="用户名" source="username" />
-          <TextField label="用户信息" source="userinfo" />
-          <DateField
-            label="创建日期"
-            source="createdate"
-            type="date"
-            showTime
-          />
-          <SegmentsField label="拥有角色" />
+          <TextField label="应用系统ID" source="appid" />
+          <TextField label="应用系统名称" source="appname" />
+          <TextField label="应用系统状态" source="appstatus" />
+          <SegmentsField label="发布管理" source="apimanager" />
           <TextField label="备注" source="remarks" />
+          <Link to={`/users`} label={"接口信息"}>
+            接口信息
+          </Link>
           <EditButton />
         </Datagrid>
       }
@@ -134,7 +127,7 @@ export const UserList = withStyles(listStyles)(({ classes, ...props }) => (
   </List>
 ));
 
-const UserTitle = ({ record }) =>
+const AppTitle = ({ record }) =>
   record ? <FullNameField record={record} size={32} /> : null;
 
 const editStyles = {
@@ -152,43 +145,23 @@ const editStyles = {
   }
 };
 
-const UserEditToolbar = props => (
+const AppEditToolbar = props => (
   <Toolbar {...props}>
     <SaveButton />
-    <Button component={Link} to={`/users`} label={"返回"} />
+    <Button component={Link} to={`/apps`} label={"返回"} />
   </Toolbar>
 );
 
-export const UserEdit = withStyles(editStyles)(({ classes, ...props }) => (
+export const AppEdit = withStyles(editStyles)(({ classes, ...props }) => (
   <Edit {...props}>
-    <TabbedForm toolbar={<UserEditToolbar />}>
-      <FormTab label="resources.users.tabs.editInfo">
-        <TextInput
-          label="用户名"
-          source="username"
-          formClassName={classes.first_name}
-        />
-        <TextInput label="用户信息" source="userinfo" />
-        <SegmentsInput label="拥有角色" source="roles" />
+    <TabbedForm toolbar={<AppEditToolbar />}>
+      <FormTab label="resources.apps.tabs.editInfo">
+        <TextField label="应用系统ID" source="appid" />
+        <TextField label="应用系统名称" source="appname" />
+        <TextField label="应用系统状态" source="appstatus" />
+        <SegmentsInput label="发布管理" source="apimanager" />
         <TextInput label="备注" source="remarks" />
       </FormTab>
     </TabbedForm>
   </Edit>
-));
-
-export const UserCreate = withStyles(editStyles)(({ classes, ...props }) => (
-  <Create {...props}>
-    <TabbedForm toolbar={<UserEditToolbar />}>
-      <FormTab label="resources.users.tabs.createInfo">
-        <TextInput
-          label="用户名"
-          source="username"
-          formClassName={classes.first_name}
-        />
-        <TextInput label="用户信息" source="userinfo" />
-        <SegmentsInput label="拥有角色" source="roles" />
-        <TextInput label="备注" source="remarks" />
-      </FormTab>
-    </TabbedForm>
-  </Create>
 ));
