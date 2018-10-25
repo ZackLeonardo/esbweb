@@ -16,6 +16,8 @@ import chineseMessages from "./i18n/zh";
 
 import { UserList, UserEdit, UserCreate, UserIcon } from "./users";
 import { AppList, AppEdit, AppCreate, AppIcon } from "./apps";
+// import { ApiList, ApiEdit, ApiCreate, ApiIcon } from "./apis";
+
 import { CommandList, CommandEdit, CommandIcon } from "./commands";
 import {
   ProductList,
@@ -26,8 +28,7 @@ import {
 import { CategoryList, CategoryEdit, CategoryIcon } from "./categories";
 import { ReviewList, ReviewEdit, ReviewIcon } from "./reviews";
 
-// import offlineDataProvider from "./dataProvider";
-// import dataProviderFactory from "./dataProvider";
+import dataProviderFactory from "./dataProvider";
 import fakeDataProvider from "ra-data-fakerest";
 import simpleRestProvider from "ra-data-simple-rest";
 
@@ -47,62 +48,12 @@ const i18nProvider = locale => {
 class App extends Component {
   state = { dataProvider: null };
 
-  componentWillMount() {
-    // this.restoreFetch = await fakeServerFactory(
-    //     process.env.REACT_APP_DATA_PROVIDER
-    // );
+  async componentWillMount() {
+    const dataProvider = await dataProviderFactory(
+      process.env.REACT_APP_DATA_PROVIDER
+    );
 
-    if (process.env.REACT_APP_DATA_PROVIDER === "rest") {
-      const dataProvider = simpleRestProvider("http://172.30.201.106:8080/esb");
-
-      this.setState({ dataProvider });
-    }
-    if (process.env.REACT_APP_DATA_PROVIDER === "offline") {
-      const dataProvider = fakeDataProvider({
-        users: [
-          {
-            userid: 0,
-            userinfo: "dddddd",
-            username: "zdy",
-            createdate: "2018/09/09 10:00:00",
-            roles: ["sysAdmin"],
-            remarks: "无"
-          },
-          {
-            userid: 1,
-            username: "swc",
-            createdate: "2018/09/09 10:00:00",
-            roles: ["sysAdmin", "apiAdmin"]
-          }
-        ],
-        apps: [
-          {
-            appid: 0,
-            appname: "dddddd",
-            appstatus: "大的",
-            remarks: "无",
-            apimanager: ["zdy"]
-          },
-          {
-            appid: 1,
-            appname: "swc",
-            appstatus: "大的",
-            remarks: "无",
-            apimanager: ["zdy", "swc"]
-          }
-        ],
-        commands: [{ id: 0, title: "Hello, world!" }],
-        products: [{ id: 0, title: "Hello, world!" }],
-        categories: [{ id: 0, title: "Hello, world!" }],
-        reviews: [{ id: 0, title: "Hello, world!" }],
-        posts: [{ id: 0, title: "Hello, world!" }, { id: 1, title: "FooBar" }],
-        comments: [
-          { id: 0, post_id: 0, author: "John Doe", body: "Sensational!" },
-          { id: 1, post_id: 0, author: "Jane Doe", body: "I agree" }
-        ]
-      });
-      this.setState({ dataProvider });
-    }
+    this.setState({ dataProvider });
   }
 
   componentWillUnmount() {
@@ -142,6 +93,7 @@ class App extends Component {
           icon={UserIcon}
         />
         <Resource name="apps" list={AppList} edit={AppEdit} icon={AppIcon} />
+        {/* <Resource name="apis" list={ApiList} edit={ApiEdit} icon={ApiIcon} /> */}
       </Admin>
     );
   }

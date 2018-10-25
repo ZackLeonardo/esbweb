@@ -120,7 +120,7 @@ export const AppList = withStyles(listStyles)(({ classes, ...props }) => (
           <Link to={`/users`} label={"接口信息"}>
             接口信息
           </Link>
-          <EditButton />
+          {1 > 0 ? <EditButton /> : null}
         </Datagrid>
       }
     />
