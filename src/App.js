@@ -19,6 +19,7 @@ import { AppList, AppEdit, AppIcon } from "./apps";
 import { ApiList, ApiEdit, ApiCreate, ApiIcon, ApiShow } from "./apis";
 import { SubList, SubEdit, SubCreate, SubIcon } from "./subs";
 import { LogList, LogIcon, LogShow } from "./logs";
+import { ErrorList, ErrorIcon } from "./errors";
 
 import { CommandList, CommandEdit, CommandIcon } from "./commands";
 import {
@@ -52,7 +53,8 @@ class App extends Component {
 
   async componentWillMount() {
     const dataProvider = await dataProviderFactory(
-      process.env.REACT_APP_DATA_PROVIDER
+      // process.env.REACT_APP_DATA_PROVIDER
+      "offline"
     );
 
     this.setState({ dataProvider });
@@ -111,6 +113,7 @@ class App extends Component {
           icon={SubIcon}
         />
         <Resource name="logs" list={LogList} show={LogShow} icon={LogIcon} />
+        <Resource name="errors" list={ErrorList} icon={ErrorIcon} />
       </Admin>
     );
   }

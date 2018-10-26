@@ -100,6 +100,14 @@ const dataProvider = fakeDataProvider({
       args: "无",
       response: "{data: {...}}"
     }
+  ],
+  errors: [
+    {
+      id: 1,
+      apiname: "getAllUsers",
+      error: "响应超时",
+      time: "2018/10/29 09:00:00:12"
+    }
   ]
 });
 
