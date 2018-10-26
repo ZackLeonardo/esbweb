@@ -9,6 +9,7 @@ export default {
       create: "新建",
       export: "下载",
       edit: "编辑",
+      show: "查看",
       sort: "排序",
       cancel: "取消",
       undo: "撤销",
@@ -27,7 +28,7 @@ export default {
     page: {
       list: "%{name}",
       edit: "%{name} 编辑",
-      show: "%{name} #%{id}",
+      show: "%{name} 查看",
       create: "%{name} 新建",
       dashboard: "概览",
       not_found: "未发现",
@@ -132,7 +133,7 @@ export default {
   },
   resources: {
     users: {
-      name: "用户管理",
+      name: "用户信息",
       fields: {
         commands: "Orders",
         groups: "Segments",
@@ -154,7 +155,7 @@ export default {
     },
 
     apps: {
-      name: "应用管理",
+      name: "应用信息",
       fields: {
         commands: "Orders",
         groups: "Segments",
@@ -165,6 +166,29 @@ export default {
       tabs: {
         editInfo: "编辑应用信息",
         createInfo: "新建用户",
+        address: "Address",
+        orders: "Orders",
+        reviews: "Reviews",
+        stats: "Stats"
+      },
+      page: {
+        delete: "Delete Customer"
+      }
+    },
+
+    apis: {
+      name: "接口信息",
+      fields: {
+        commands: "Orders",
+        groups: "Segments",
+        last_seen_gte: "Visited Since",
+        name: "Name",
+        total_spent: "Total spent"
+      },
+      tabs: {
+        editInfo: "编辑接口信息",
+        createInfo: "新建接口",
+        showInfo: "查看接口",
         address: "Address",
         orders: "Orders",
         reviews: "Reviews",

@@ -15,8 +15,8 @@ import customRoutes from "./routes";
 import chineseMessages from "./i18n/zh";
 
 import { UserList, UserEdit, UserCreate, UserIcon } from "./users";
-import { AppList, AppEdit, AppCreate, AppIcon } from "./apps";
-// import { ApiList, ApiEdit, ApiCreate, ApiIcon } from "./apis";
+import { AppList, AppEdit, AppIcon } from "./apps";
+import { ApiList, ApiEdit, ApiCreate, ApiIcon, ApiShow } from "./apis";
 
 import { CommandList, CommandEdit, CommandIcon } from "./commands";
 import {
@@ -93,7 +93,14 @@ class App extends Component {
           icon={UserIcon}
         />
         <Resource name="apps" list={AppList} edit={AppEdit} icon={AppIcon} />
-        {/* <Resource name="apis" list={ApiList} edit={ApiEdit} icon={ApiIcon} /> */}
+        <Resource
+          name="apis"
+          list={ApiList}
+          edit={ApiEdit}
+          create={ApiCreate}
+          icon={ApiIcon}
+          show={ApiShow}
+        />
       </Admin>
     );
   }

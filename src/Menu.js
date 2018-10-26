@@ -13,13 +13,12 @@ import { withRouter } from "react-router-dom";
 
 import { UserIcon } from "./users";
 import { AppIcon } from "./apps";
-// import { ProductIcon } from "./products";
-// import { CategoryIcon } from "./categories";
-// import { ReviewIcon } from "./reviews";
+import { ApiIcon } from "./apis";
 
 const items = [
   { name: "users", icon: <UserIcon /> },
-  { name: "apps", icon: <AppIcon /> }
+  { name: "apps", icon: <AppIcon /> },
+  { name: "apis", icon: <ApiIcon /> }
   //   { name: "commands", icon: <CommandIcon /> },
   //   { name: "products", icon: <ProductIcon /> },
   //   { name: "categories", icon: <CategoryIcon /> },

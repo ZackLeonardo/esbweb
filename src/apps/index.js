@@ -117,7 +117,7 @@ export const AppList = withStyles(listStyles)(({ classes, ...props }) => (
           <TextField label="应用系统状态" source="appstatus" />
           <SegmentsField label="发布管理" source="apimanager" />
           <TextField label="备注" source="remarks" />
-          <Link to={`/users`} label={"接口信息"}>
+          <Link to={`/apis`} label={"接口信息"}>
             接口信息
           </Link>
           {1 > 0 ? <EditButton /> : null}

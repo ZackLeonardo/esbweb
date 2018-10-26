@@ -35,14 +35,35 @@ const dataProvider = fakeDataProvider({
       apimanager: ["zdy", "swc"]
     }
   ],
-  commands: [{ id: 0, title: "Hello, world!" }],
-  products: [{ id: 0, title: "Hello, world!" }],
-  categories: [{ id: 0, title: "Hello, world!" }],
-  reviews: [{ id: 0, title: "Hello, world!" }],
-  posts: [{ id: 0, title: "Hello, world!" }, { id: 1, title: "FooBar" }],
-  comments: [
-    { id: 0, post_id: 0, author: "John Doe", body: "Sensational!" },
-    { id: 1, post_id: 0, author: "Jane Doe", body: "I agree" }
+  apis: [
+    {
+      apiid: 0,
+      apiname: "getAllUsers",
+      appname: "用户管理",
+      version: "1.0",
+      transfer: "http",
+      status: "服务中",
+      modifydate: "2018/10/26 09:00:00",
+      modifyuser: "孙文成",
+      remarks: "获取所有用户信息",
+      args1: "status",
+      argsr1: "1或0",
+      output1: "{data: {username: 'ddd'}}"
+    },
+    {
+      apiid: 1,
+      apiname: "getAllOrgs",
+      appname: "用户管理",
+      version: "1.0",
+      transfer: "http",
+      status: "服务中",
+      modifydate: "2018/10/26 09:00:00",
+      modifyuser: "孙文成",
+      remarks: "获取所有机构信息",
+      args1: "status",
+      argsr1: "1或0",
+      output1: "{data: {username: 'ddd'}}"
+    }
   ]
 });
 

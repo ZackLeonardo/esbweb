@@ -6,6 +6,7 @@ import segments from "../segments/data";
 const SegmentsInput = ({ translate, addField, ...rest }) => (
   <SelectArrayInput
     {...rest}
+    allowEmpty={false}
     choices={segments.map(segment => ({
       id: segment.id,
       name: translate(segment.name)
