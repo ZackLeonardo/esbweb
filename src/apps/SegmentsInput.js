@@ -1,10 +1,5 @@
 import React, { Component } from "react";
 import { SelectArrayInput } from "react-admin";
-// import { connect } from 'react-redux';
-import { UserEdit } from "../users";
-// import { dispatch } from "react-redux";
-import compose from "recompose/compose";
-import { connect } from "react-redux";
 import dataProviderFactory from "../dataProvider";
 
 class SegmentsInput extends Component {
@@ -88,11 +83,4 @@ SegmentsInput.defaultProps = {
   addField: true
 };
 
-// function mapStateToProps(state) {
-//   return {
-//     usersegmets: state.admin.resources.users
-//   };
-// }
-
-// export default compose(connect(mapStateToProps))(SegmentsInput);
 export default SegmentsInput;

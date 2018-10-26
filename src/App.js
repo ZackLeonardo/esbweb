@@ -21,19 +21,7 @@ import { SubList, SubEdit, SubCreate, SubIcon } from "./subs";
 import { LogList, LogIcon, LogShow } from "./logs";
 import { ErrorList, ErrorIcon } from "./errors";
 
-import { CommandList, CommandEdit, CommandIcon } from "./commands";
-import {
-  ProductList,
-  ProductCreate,
-  ProductEdit,
-  ProductIcon
-} from "./products";
-import { CategoryList, CategoryEdit, CategoryIcon } from "./categories";
-import { ReviewList, ReviewEdit, ReviewIcon } from "./reviews";
-
 import dataProviderFactory from "./dataProvider";
-import fakeDataProvider from "ra-data-fakerest";
-import simpleRestProvider from "ra-data-simple-rest";
 
 const i18nProvider = locale => {
   if (locale === "fr") {
@@ -53,8 +41,7 @@ class App extends Component {
 
   async componentWillMount() {
     const dataProvider = await dataProviderFactory(
-      // process.env.REACT_APP_DATA_PROVIDER
-      "offline"
+      process.env.REACT_APP_DATA_PROVIDER
     );
 
     this.setState({ dataProvider });

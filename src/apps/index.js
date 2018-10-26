@@ -1,18 +1,12 @@
 import React from "react";
 import {
-  Create,
   Datagrid,
-  DateField,
-  DateInput,
   Edit,
   EditButton,
   Filter,
   FormTab,
   List,
-  LongTextInput,
-  NullableBooleanInput,
   NumberField,
-  ReferenceManyField,
   Responsive,
   SearchInput,
   TabbedForm,
@@ -28,14 +22,9 @@ import {
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Apps";
 
-import NbItemsField from "../commands/NbItemsField";
-import ProductReferenceField from "../products/ProductReferenceField";
-import StarRatingField from "../reviews/StarRatingField";
 import FullNameField from "./FullNameField";
 import SegmentsField from "./SegmentsField";
-import SegmentInput from "./SegmentInput";
 import SegmentsInput from "./SegmentsInput";
-import CustomerLinkField from "./CustomerLinkField";
 import MobileGrid from "./MobileGrid";
 
 export const AppIcon = Icon;
@@ -117,6 +106,7 @@ export const AppList = withStyles(listStyles)(({ classes, ...props }) => (
           <TextField label="应用系统状态" source="appstatus" />
           <SegmentsField label="发布管理" source="apimanager" />
           <TextField label="备注" source="remarks" />
+
           <Link to={`/apis`} label={"接口信息"}>
             接口信息
           </Link>
