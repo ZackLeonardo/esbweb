@@ -5,7 +5,7 @@ const dataProvider = fakeDataProvider({
     {
       userid: 0,
       userinfo: "dddddd",
-      username: "zdy",
+      username: "常梦龙",
       createdate: "2018/09/09 10:00:00",
       roles: ["sysAdmin"],
       remarks: "无",
@@ -13,7 +13,7 @@ const dataProvider = fakeDataProvider({
     },
     {
       userid: 1,
-      username: "swc",
+      username: "孙文成",
       createdate: "2018/09/09 10:00:00",
       roles: ["sysAdmin", "apiAdmin"],
       status: 1
@@ -22,17 +22,17 @@ const dataProvider = fakeDataProvider({
   apps: [
     {
       appid: 0,
-      appname: "dddddd",
-      appstatus: "大的",
+      appname: "用户管理",
+      appstatus: "启用",
       remarks: "无",
-      apimanager: ["zdy"]
+      apimanager: ["孙文成"]
     },
     {
       appid: 1,
-      appname: "swc",
+      appname: "权限管理",
       appstatus: "大的",
       remarks: "无",
-      apimanager: ["zdy", "swc"]
+      apimanager: ["孙文成"]
     }
   ],
   apis: [
@@ -63,6 +63,30 @@ const dataProvider = fakeDataProvider({
       args1: "status",
       argsr1: "1或0",
       output1: "{data: {username: 'ddd'}}"
+    }
+  ],
+  logs: [
+    {
+      id: 0,
+      apiname: "getAllUsers",
+      appname: "行政办公",
+      result: "成功",
+      start: "2018/10/10 09:00:00:00",
+      end: "2018/10/10 09:00:00:10",
+      spend: "10ms",
+      args: "无",
+      response: "{data: {...}}"
+    },
+    {
+      id: 1,
+      apiname: "getAllUsers",
+      appname: "行政办公",
+      result: "成功",
+      start: "2018/10/10 09:00:00:20",
+      end: "2018/10/10 09:00:00:30",
+      spend: "10ms",
+      args: "无",
+      response: "{data: {...}}"
     }
   ]
 });
