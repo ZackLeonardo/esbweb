@@ -175,6 +175,9 @@ export const ApiEdit = withStyles(editStyles)(({ classes, ...props }) => (
         <TextInput label="接口状态" source="status" />
         <TextInput label="备注" source="remarks" />
       </FormTab>
+      <FormTab label="接口地址">
+        <TextInput label="接口地址" source="url" />
+      </FormTab>
       <FormTab label="输入参数说明">
         <TextInput
           label="参数名称"
@@ -208,6 +211,9 @@ export const ApiCreate = withStyles(editStyles)(({ classes, ...props }) => (
         <TextInput label="接口协议" source="transfer" />
         <TextInput label="接口状态" source="status" />
         <TextInput label="备注" source="remarks" />
+      </FormTab>
+      <FormTab label="接口地址">
+        <TextInput label="接口地址" source="url" />
       </FormTab>
       <FormTab label="输入参数说明">
         <TextInput
@@ -245,6 +251,9 @@ export const ApiShow = withStyles(editStyles)(({ classes, ...props }) => (
         <TextField label="最新修改人" source="modifyuser" />
         <TextField label="备注" source="remarks" />
       </Tab>
+      <FormTab label="接口地址">
+        <TextField label="接口地址" source="url" />
+      </FormTab>
       <FormTab label="输入参数说明">
         <TextField
           label="参数名称"

@@ -48,7 +48,8 @@ const dataProvider = fakeDataProvider({
       remarks: "获取所有用户信息",
       args1: "status",
       argsr1: "1或0",
-      output1: "{data: {username: 'ddd'}}"
+      output1: "{data: {username: 'ddd'}}",
+      url: "http://umc.dpm.org.cn/getAllUsers.do"
     },
     {
       apiid: 1,
@@ -62,7 +63,8 @@ const dataProvider = fakeDataProvider({
       remarks: "获取所有机构信息",
       args1: "status",
       argsr1: "1或0",
-      output1: "{data: {username: 'ddd'}}"
+      output1: "{data: {username: 'ddd'}}",
+      url: "http://umc.dpm.org.cn"
     }
   ],
   subs: [
