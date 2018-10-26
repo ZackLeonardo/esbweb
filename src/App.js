@@ -17,6 +17,7 @@ import chineseMessages from "./i18n/zh";
 import { UserList, UserEdit, UserCreate, UserIcon } from "./users";
 import { AppList, AppEdit, AppIcon } from "./apps";
 import { ApiList, ApiEdit, ApiCreate, ApiIcon, ApiShow } from "./apis";
+import { SubList, SubEdit, SubCreate, SubIcon } from "./subs";
 import { LogList, LogIcon, LogShow } from "./logs";
 
 import { CommandList, CommandEdit, CommandIcon } from "./commands";
@@ -102,7 +103,13 @@ class App extends Component {
           icon={ApiIcon}
           show={ApiShow}
         />
-
+        <Resource
+          name="subs"
+          list={SubList}
+          edit={SubEdit}
+          create={SubCreate}
+          icon={SubIcon}
+        />
         <Resource name="logs" list={LogList} show={LogShow} icon={LogIcon} />
       </Admin>
     );

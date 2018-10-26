@@ -199,6 +199,28 @@ export default {
       }
     },
 
+    subs: {
+      name: "接口订阅",
+      fields: {
+        commands: "Orders",
+        groups: "Segments",
+        last_seen_gte: "Visited Since",
+        name: "Name",
+        total_spent: "Total spent"
+      },
+      tabs: {
+        editInfo: "编辑订阅",
+        createInfo: "新建订阅",
+        address: "Address",
+        orders: "Orders",
+        reviews: "Reviews",
+        stats: "Stats"
+      },
+      page: {
+        delete: "Delete Customer"
+      }
+    },
+
     logs: {
       name: "日志信息",
       fields: {

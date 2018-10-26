@@ -15,11 +15,13 @@ import { UserIcon } from "./users";
 import { AppIcon } from "./apps";
 import { ApiIcon } from "./apis";
 import { LogIcon } from "./logs";
+import { SubIcon } from "./subs";
 
 const items = [
   { name: "users", icon: <UserIcon /> },
   { name: "apps", icon: <AppIcon /> },
   { name: "apis", icon: <ApiIcon /> },
+  { name: "subs", icon: <SubIcon /> },
   { name: "logs", icon: <LogIcon /> }
   //   { name: "commands", icon: <CommandIcon /> },
   //   { name: "products", icon: <ProductIcon /> },

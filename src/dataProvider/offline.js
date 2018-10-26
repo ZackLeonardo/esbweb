@@ -65,6 +65,18 @@ const dataProvider = fakeDataProvider({
       output1: "{data: {username: 'ddd'}}"
     }
   ],
+  subs: [
+    {
+      apiname: "getAllOrgs",
+      appname: "用户管理",
+      user: "孙文成"
+    },
+    {
+      apiname: "getAllOrgs",
+      appname: "用户管理",
+      user: "孙文成"
+    }
+  ],
   logs: [
     {
       id: 0,
