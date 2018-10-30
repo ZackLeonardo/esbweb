@@ -41,7 +41,7 @@ class App extends Component {
 
   async componentWillMount() {
     const dataProvider = await dataProviderFactory(
-      process.env.REACT_APP_DATA_PROVIDER
+      process.env.REACT_APP_DATA_PROVIDER //process.env.REACT_APP_DATA_PROVIDER
     );
 
     this.setState({ dataProvider });

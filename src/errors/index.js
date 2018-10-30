@@ -28,14 +28,7 @@ import {
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Error";
 
-import NbItemsField from "../commands/NbItemsField";
-import ProductReferenceField from "../products/ProductReferenceField";
-import StarRatingField from "../reviews/StarRatingField";
 import FullNameField from "./FullNameField";
-import SegmentsField from "./SegmentsField";
-import SegmentInput from "./SegmentInput";
-import SegmentsInput from "./SegmentsInput";
-import CustomerLinkField from "./CustomerLinkField";
 import MobileGrid from "./MobileGrid";
 
 export const ErrorIcon = Icon;

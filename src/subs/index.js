@@ -32,14 +32,8 @@ import {
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Flag";
 
-import NbItemsField from "../commands/NbItemsField";
-import ProductReferenceField from "../products/ProductReferenceField";
-import StarRatingField from "../reviews/StarRatingField";
 import FullNameField from "./FullNameField";
-import SegmentsField from "./SegmentsField";
 import SegmentInput from "./SegmentInput";
-import SegmentsInput from "./SegmentsInput";
-import ApidetailLinkField from "./ApidetailLinkField";
 import ApiLinkField from "./ApiLinkField";
 import MobileGrid from "./MobileGrid";
 
