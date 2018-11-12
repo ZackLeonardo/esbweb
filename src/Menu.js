@@ -33,8 +33,6 @@ const items = [
 ];
 
 const Menu = ({ onMenuClick, translate, logout, resources }) => {
-  console.log("resources:" + resources);
-
   return (
     <div>
       {/* <DashboardMenuItem onClick={onMenuClick} /> */}

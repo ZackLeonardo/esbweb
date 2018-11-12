@@ -21,11 +21,14 @@ import {
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Apps";
+import { stringify } from "query-string";
+import get from "lodash/get";
 
 import FullNameField from "./FullNameField";
 import SegmentsField from "./SegmentsField";
 import SegmentsInput from "./SegmentsInput";
 import MobileGrid from "./MobileGrid";
+import LinkedTo from "./LinkedTo";
 
 export const AppIcon = Icon;
 
@@ -99,33 +102,32 @@ const AppActions = ({
   </CardActions>
 );
 
-export const AppList = withStyles(listStyles)(({ classes, ...props }) => (
-  <List
-    {...props}
-    filters={<AppFilter />}
-    sort={{ field: "id", order: "DESC" }}
-    perPage={25}
-    actions={<AppActions />}
-  >
-    <Responsive
-      xsmall={<MobileGrid />}
-      medium={
-        <Datagrid>
-          <TextField label="应用系统ID" source="appid" />
-          <TextField label="应用系统名称" source="appname" />
-          <TextField label="应用系统状态" source="status" />
-          <SegmentsField label="发布管理" source="apimanager" />
-          <TextField label="备注" source="remarks" />
-
-          <Link to={`/apis`} label={"接口信息"}>
-            接口信息
-          </Link>
-          {1 > 0 ? <EditButton /> : null}
-        </Datagrid>
-      }
-    />
-  </List>
-));
+export const AppList = withStyles(listStyles)(
+  ({ classes, record, ...props }) => (
+    <List
+      {...props}
+      filters={<AppFilter />}
+      sort={{ field: "id", order: "DESC" }}
+      perPage={25}
+      actions={<AppActions />}
+    >
+      <Responsive
+        xsmall={<MobileGrid />}
+        medium={
+          <Datagrid>
+            <TextField label="应用系统ID" source="appid" />
+            <TextField label="应用系统名称" source="appname" />
+            <TextField label="应用系统状态" source="status" />
+            <SegmentsField label="发布管理" source="apimanager" />
+            <TextField label="备注" source="remarks" />
+            <LinkedTo label="接口信息" source="appid" />
+            {1 > 0 ? <EditButton /> : null}
+          </Datagrid>
+        }
+      />
+    </List>
+  )
+);
 
 const AppTitle = ({ record }) =>
   record ? <FullNameField record={record} size={32} /> : null;

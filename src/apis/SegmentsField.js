@@ -6,18 +6,16 @@ const styles = {
   chip: { margin: 4 }
 };
 
-const SegmentsField = ({ record }) => (
+const SegmentsField = ({ record, source }) => (
   <span style={styles.main}>
-    {record.apimanager &&
-      record.apimanager.map(segment => (
-        <Chip key={segment} style={styles.chip} label={segment} />
-      ))}
+    {record[source] && (
+      <Chip key={record[source]} style={styles.chip} label={record[source]} />
+    )}
   </span>
 );
 
 SegmentsField.defaultProps = {
-  addLabel: true,
-  source: "apimanager"
+  addLabel: true
 };
 
 export default SegmentsField;

@@ -33,6 +33,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Add";
 
 import FullNameField from "./FullNameField";
+import SegmentsField from "./SegmentsField";
 import SegmentInput from "./SegmentInput";
 import ApidetailLinkField from "./ApidetailLinkField";
 import ApiLogLinkField from "./ApiLogLinkField";
@@ -116,11 +117,11 @@ export const ApiList = withStyles(listStyles)(({ classes, ...props }) => (
         <Datagrid>
           <TextField label="接口名称" source="apiname" />
           <TextField label="所属应用系统" source="appname" />
-          <TextField label="接口版本" source="version" />
-          <TextField label="接口协议" source="transfer" />
-          <TextField label="接口状态" source="status" />
-          <TextField label="最新修改时间" source="modifydate" />
-          <TextField label="最新修改人" source="modifyuser" />
+          <TextField label="接口版本" source="edition" />
+          <SegmentsField label="接口协议" source="transfer" />
+          <SegmentsField label="接口状态" source="cyclestatus" />
+          <TextField label="最新修改时间" source="apilastmodifytime" />
+          <TextField label="最新修改人" source="apilastmodifier" />
           <TextField label="备注" source="remarks" />
           <ApidetailLinkField />
           <ApiLogLinkField />
