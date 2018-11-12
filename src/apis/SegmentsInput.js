@@ -14,7 +14,7 @@ class SegmentsInput extends Component {
   };
 
   componentWillMount = () => {
-    dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
+    dataProviderFactory('rest').then(
       //process.env.REACT_APP_DATA_PROVIDER
       dataProvider => {
         dataProvider("GET_LIST", "users", {

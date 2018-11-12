@@ -23,14 +23,14 @@ const dataProvider = fakeDataProvider({
     {
       appid: 0,
       appname: "用户管理",
-      appstatus: "启用",
+      status: "启用",
       remarks: "无",
       apimanager: ["孙文成"]
     },
     {
       appid: 1,
       appname: "权限管理",
-      appstatus: "大的",
+      status: "大的",
       remarks: "无",
       apimanager: ["孙文成"]
     }

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
+import { Button, Input } from "@material-ui/core";
 import { translate, changeLocale, Title } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import compose from "recompose/compose";
@@ -13,52 +13,28 @@ const styles = {
   button: { margin: "1em" }
 };
 
-const Configuration = ({
-  classes,
-  theme,
-  locale,
-  changeTheme,
-  changeLocale,
-  translate
-}) => (
+const Configuration = ({ classes, locale, changeLocale, translate }) => (
   <Card>
     <Title title={translate("pos.configuration")} />
     <CardContent>
-      <div className={classes.label}>{translate("pos.theme.name")}</div>
-      <Button
-        variant="raised"
-        className={classes.button}
-        color={theme === "light" ? "primary" : "default"}
-        onClick={() => changeTheme("light")}
-      >
-        {translate("pos.theme.light")}
-      </Button>
-      <Button
-        variant="raised"
-        className={classes.button}
-        color={theme === "dark" ? "primary" : "default"}
-        onClick={() => changeTheme("dark")}
-      >
-        {translate("pos.theme.dark")}
-      </Button>
+      <div className={classes.label}>原密码</div>
+      <Input className={classes.button} />
     </CardContent>
     <CardContent>
-      <div className={classes.label}>{translate("pos.language")}</div>
+      <div className={classes.label}>新密码</div>
+      <Input className={classes.button} />
+    </CardContent>
+    <CardContent>
+      <div className={classes.label}>新密码确认</div>
+      <Input className={classes.button} />
+    </CardContent>
+    <CardContent>
       <Button
         variant="raised"
-        className={classes.button}
-        color={locale === "en" ? "primary" : "default"}
+        color={"primary"}
         onClick={() => changeLocale("en")}
       >
-        英文
-      </Button>
-      <Button
-        variant="raised"
-        className={classes.button}
-        color={locale === "fr" ? "primary" : "default"}
-        onClick={() => changeLocale("zh")}
-      >
-        中文
+        确定
       </Button>
     </CardContent>
   </Card>

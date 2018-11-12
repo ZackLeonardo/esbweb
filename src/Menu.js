@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createElement } from "react";
 import { connect } from "react-redux";
 import compose from "recompose/compose";
 import SettingsIcon from "@material-ui/icons/Settings";
@@ -7,7 +7,8 @@ import {
   translate,
   DashboardMenuItem,
   MenuItemLink,
-  Responsive
+  Responsive,
+  getResources
 } from "react-admin";
 import { withRouter } from "react-router-dom";
 
@@ -31,41 +32,46 @@ const items = [
   //   { name: "reviews", icon: <ReviewIcon /> }
 ];
 
-const Menu = ({ onMenuClick, translate, logout }) => (
-  <div>
-    <DashboardMenuItem onClick={onMenuClick} />
-    {items.map(item => (
-      <MenuItemLink
-        key={item.name}
-        to={`/${item.name}`}
-        primaryText={translate(`resources.${item.name}.name`, {
-          smart_count: 2
-        })}
-        leftIcon={item.icon}
-        onClick={onMenuClick}
-      />
-    ))}
-    <Responsive
-      xsmall={
+const Menu = ({ onMenuClick, translate, logout, resources }) => {
+  console.log("resources:" + resources);
+
+  return (
+    <div>
+      {/* <DashboardMenuItem onClick={onMenuClick} /> */}
+      {resources.map(item => (
         <MenuItemLink
-          to="/configuration"
-          primaryText={translate("pos.configuration")}
-          leftIcon={<SettingsIcon />}
+          key={item.name}
+          to={`/${item.name}`}
+          primaryText={translate(`resources.${item.name}.name`, {
+            smart_count: 2
+          })}
+          leftIcon={createElement(item.icon)}
           onClick={onMenuClick}
         />
-      }
-      medium={null}
-    />
-    <Responsive xsmall={logout} medium={null} />
-  </div>
-);
+      ))}
+      <Responsive
+        xsmall={
+          <MenuItemLink
+            to="/configuration"
+            primaryText={translate("pos.configuration")}
+            leftIcon={<SettingsIcon />}
+            onClick={onMenuClick}
+          />
+        }
+        medium={null}
+      />
+      <Responsive xsmall={logout} medium={null} />
+    </div>
+  );
+};
 
 const enhance = compose(
   withRouter,
   connect(
     state => ({
       theme: state.theme,
-      locale: state.i18n.locale
+      locale: state.i18n.locale,
+      resources: getResources(state)
     }),
     {}
   ),

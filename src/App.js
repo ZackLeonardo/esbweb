@@ -41,7 +41,7 @@ class App extends Component {
 
   async componentWillMount() {
     const dataProvider = await dataProviderFactory(
-      process.env.REACT_APP_DATA_PROVIDER //process.env.REACT_APP_DATA_PROVIDER
+      process.env.REACT_APP_DATA_PROVIDER
     );
 
     this.setState({ dataProvider });
@@ -76,31 +76,42 @@ class App extends Component {
         locale="zh"
         i18nProvider={i18nProvider}
       >
-        <Resource
-          name="users"
-          list={UserList}
-          edit={UserEdit}
-          create={UserCreate}
-          icon={UserIcon}
-        />
-        <Resource name="apps" list={AppList} edit={AppEdit} icon={AppIcon} />
-        <Resource
-          name="apis"
-          list={ApiList}
-          edit={ApiEdit}
-          create={ApiCreate}
-          icon={ApiIcon}
-          show={ApiShow}
-        />
-        <Resource
-          name="subs"
-          list={SubList}
-          edit={SubEdit}
-          create={SubCreate}
-          icon={SubIcon}
-        />
-        <Resource name="logs" list={LogList} show={LogShow} icon={LogIcon} />
-        <Resource name="errors" list={ErrorList} icon={ErrorIcon} />
+        {permissions => [
+          permissions === "sysAdmin" ? (
+            <Resource
+              name="users"
+              list={UserList}
+              edit={UserEdit}
+              create={UserCreate}
+              icon={UserIcon}
+            />
+          ) : null,
+          permissions === "sysAdmin" ? (
+            <Resource
+              name="apps"
+              list={AppList}
+              edit={AppEdit}
+              icon={AppIcon}
+            />
+          ) : null,
+          <Resource
+            name="apis"
+            list={ApiList}
+            edit={ApiEdit}
+            create={ApiCreate}
+            icon={ApiIcon}
+            show={ApiShow}
+          />,
+          <Resource
+            name="subs"
+            list={SubList}
+            edit={SubEdit}
+            create={SubCreate}
+            icon={SubIcon}
+          />,
+          <Resource name="logs" list={LogList} show={LogShow} icon={LogIcon} />,
+          <Resource name="errors" list={ErrorList} icon={ErrorIcon} />
+        ]}
       </Admin>
     );
   }

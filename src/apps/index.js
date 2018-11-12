@@ -85,7 +85,17 @@ const AppActions = ({
         filterValues,
         context: "button"
       })}
-    <RefreshButton label="同步" />
+    <RefreshButton label="刷新" />
+    <Button
+      label="同步"
+      onClick={dataProvider =>
+        dataProvider("GET_LIST", "appsUpdate", {
+          // filter: { isUpdate: ture },
+          pagination: { page: 1, perPage: 25 },
+          sort: { field: "appid", order: "ASC" }
+        })
+      }
+    />
   </CardActions>
 );
 
@@ -103,7 +113,7 @@ export const AppList = withStyles(listStyles)(({ classes, ...props }) => (
         <Datagrid>
           <TextField label="应用系统ID" source="appid" />
           <TextField label="应用系统名称" source="appname" />
-          <TextField label="应用系统状态" source="appstatus" />
+          <TextField label="应用系统状态" source="status" />
           <SegmentsField label="发布管理" source="apimanager" />
           <TextField label="备注" source="remarks" />
 
@@ -148,7 +158,7 @@ export const AppEdit = withStyles(editStyles)(({ classes, ...props }) => (
       <FormTab label="resources.apps.tabs.editInfo">
         <TextField label="应用系统ID" source="appid" />
         <TextField label="应用系统名称" source="appname" />
-        <TextField label="应用系统状态" source="appstatus" />
+        <TextField label="应用系统状态" source="status" />
         <SegmentsInput label="发布管理" source="apimanager" />
         <TextInput label="备注" source="remarks" />
       </FormTab>

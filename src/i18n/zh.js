@@ -105,7 +105,7 @@ export default {
   },
   pos: {
     search: "搜索",
-    configuration: "配置",
+    configuration: "修改密码",
     language: "语言",
     theme: {
       name: "皮肤",

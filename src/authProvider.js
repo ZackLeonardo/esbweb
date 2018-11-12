@@ -1,4 +1,10 @@
-import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_CHECK, AUTH_ERROR } from "react-admin";
+import {
+  AUTH_LOGIN,
+  AUTH_LOGOUT,
+  AUTH_CHECK,
+  AUTH_ERROR,
+  AUTH_GET_PERMISSIONS
+} from "react-admin";
 
 export default (type, params) => {
   if (type === AUTH_LOGIN) {
@@ -20,6 +26,7 @@ export default (type, params) => {
     //   });
     const { username } = params;
     localStorage.setItem("username", username);
+    localStorage.setItem("role", "sysAdmin");
     // accept all username/password combinations
     return Promise.resolve();
   }
@@ -34,6 +41,10 @@ export default (type, params) => {
     return localStorage.getItem("username")
       ? Promise.resolve()
       : Promise.reject();
+  }
+  if (type === AUTH_GET_PERMISSIONS) {
+    const role = localStorage.getItem("role");
+    return role ? Promise.resolve(role) : Promise.reject();
   }
   return Promise.reject("Unkown method");
 };
