@@ -14,23 +14,36 @@ class SegmentInput extends Component {
   };
 
   componentWillMount = () => {
-    dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
-      //process.env.REACT_APP_DATA_PROVIDER
-      dataProvider => {
-        dataProvider("GET_LIST", "apps", {
-          filter: { status: "启用" },
-          pagination: { page: 1, perPage: 9999 },
-          sort: { field: "appid", order: "ASC" }
-        })
-          .then(response => response.data)
-          .then(items =>
-            items.map(item => {
-              return { id: item.appid, name: item.appname };
-            })
-          )
-          .then(segments => this.setState({ segments: segments }));
-      }
-    );
+    const { source } = this.props;
+    if (source === "transfer") {
+      const segments = [
+        { id: "http", name: "Http" },
+        { id: "restful", name: "Restful Http" },
+        { id: "webservice", name: "Webservice" }
+      ];
+      this.setState({ segments: segments });
+    } else if (source === "cyclestatusid") {
+      const segments = [{ id: "1", name: "启用" }, { id: "0", name: "停用" }];
+      this.setState({ segments: segments });
+    } else {
+      dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
+        //process.env.REACT_APP_DATA_PROVIDER
+        dataProvider => {
+          dataProvider("GET_LIST", "apps", {
+            filter: { status: "启用" },
+            pagination: { page: 1, perPage: 9999 },
+            sort: { field: "appid", order: "ASC" }
+          })
+            .then(response => response.data)
+            .then(items =>
+              items.map(item => {
+                return { id: item.appid, name: item.appname };
+              })
+            )
+            .then(segments => this.setState({ segments: segments }));
+        }
+      );
+    }
   };
 
   render() {
@@ -42,7 +55,7 @@ class SegmentInput extends Component {
         {...rest}
         choices={segments.map(segment => ({
           id: segment.id,
-          name: translate(segment.name)
+          name: segment.name
         }))}
         className={classes.input}
       />
@@ -56,7 +69,7 @@ const TranslatedSegmentInput = compose(
 )(SegmentInput);
 
 TranslatedSegmentInput.defaultProps = {
-  source: "appid"
+  source: "appname"
 };
 
 export default TranslatedSegmentInput;

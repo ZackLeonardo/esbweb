@@ -42,15 +42,30 @@ const dataProvider = fakeDataProvider({
       appid: 0,
       appname: "用户管理",
       edition: "1.0",
-      transfer: "http",
+      transfer: "restful",
+      cyclestatusid: "1",
       cyclestatus: "服务中",
       apilastmodifytime: "2018/10/26 09:00:00",
       apilastmodifier: "孙文成",
       remarks: "获取所有用户信息",
       args1: "status",
       argsr1: "1或0",
-      output1: "{data: {username: 'ddd'}}",
-      url: "http://umc.dpm.org.cn/getAllUsers.do"
+      outputexample: "{data: {username: 'ddd'}}",
+      url: "http://umc.dpm.org.cn/getAllUsers.do",
+      args: [
+        {
+          id: 1,
+          parametername: "test",
+          description: "test",
+          example: "test"
+        },
+        {
+          id: 1,
+          parametername: "test1",
+          description: "test1",
+          example: "test1"
+        }
+      ]
     },
     {
       apiid: 1,
@@ -59,14 +74,29 @@ const dataProvider = fakeDataProvider({
       appid: 0,
       edition: "1.0",
       transfer: "http",
+      cyclestatusid: "1",
       cyclestatus: "服务中",
       apilastmodifytime: "2018/10/26 09:00:00",
       apilastmodifier: "孙文成",
       remarks: "获取所有机构信息",
       args1: "status",
       argsr1: "1或0",
-      output1: "{data: {username: 'ddd'}}",
-      url: "http://umc.dpm.org.cn"
+      outputexample: "{data: {username: 'ddd'}}",
+      url: "http://umc.dpm.org.cn",
+      args: [
+        {
+          id: 1,
+          parametername: "test",
+          description: "test",
+          example: "test"
+        },
+        {
+          id: 1,
+          parametername: "test1",
+          description: "test1",
+          example: "test1"
+        }
+      ]
     }
   ],
   subs: [
@@ -112,7 +142,8 @@ const dataProvider = fakeDataProvider({
       error: "响应超时",
       time: "2018/10/29 09:00:00:12"
     }
-  ]
+  ],
+  appsUpdate: []
 });
 
 export default (type, resource, params) =>

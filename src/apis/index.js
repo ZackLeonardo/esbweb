@@ -27,10 +27,15 @@ import {
   RefreshButton,
   SaveButton,
   CreateButton,
-  Toolbar
+  Toolbar,
+  RichTextField,
+  ArrayInput,
+  ArrayField,
+  SimpleFormIterator
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Add";
+import RichTextInput from "ra-input-rich-text";
 
 import FullNameField from "./FullNameField";
 import SegmentsField from "./SegmentsField";
@@ -44,7 +49,7 @@ export const ApiIcon = Icon;
 const ApiFilter = props => (
   <Filter {...props}>
     <SearchInput source="q" alwaysOn />
-    <SegmentInput alwaysOn />
+    <SegmentInput source="appid" alwaysOn />
   </Filter>
 );
 
@@ -116,7 +121,7 @@ export const ApiList = withStyles(listStyles)(({ classes, ...props }) => (
       medium={
         <Datagrid>
           <TextField label="接口名称" source="apiname" />
-          <TextField label="所属应用系统" source="appname" />
+          <SegmentsField label="所属应用系统" source="appname" />
           <TextField label="接口版本" source="edition" />
           <SegmentsField label="接口协议" source="transfer" />
           <SegmentsField label="接口状态" source="cyclestatus" />
@@ -162,35 +167,32 @@ const ApiEditToolbar = props => (
 
 export const ApiEdit = withStyles(editStyles)(({ classes, ...props }) => (
   <Edit {...props}>
-    <TabbedForm toolbar={<ApiEditToolbar />}>
+    <TabbedForm toolbar={<ApiEditToolbar />} style={{ width: "100%" }}>
       <FormTab label="基本信息">
         <TextInput label="接口名称" source="apiname" />
-        <TextInput label="所属应用系统" source="appname" />
-        <TextInput label="接口版本" source="version" />
-        <TextInput label="接口协议" source="transfer" />
-        <TextInput label="接口状态" source="status" />
+        <TextInput label="接口版本" source="edition" />
+        <SegmentInput label="所属应用系统" source="appid" />
+        <SegmentInput label="接口协议" source="transfer" />
+        <SegmentInput label="接口状态" source="cyclestatusid" />
         <TextInput label="备注" source="remarks" />
       </FormTab>
       <FormTab label="接口地址">
         <TextInput label="接口地址" source="url" />
       </FormTab>
-      <FormTab label="输入参数说明">
-        <TextInput
-          label="参数名称"
-          source="args1"
-          formClassName={classes.first_name}
-        />
-        <TextInput
-          label="参数约束"
-          source="argsr1"
-          formClassName={classes.last_name}
-        />
+      <FormTab label="输入参数说明" style={{ width: "100%" }}>
+        <ArrayInput label="参数表" source="args">
+          <SimpleFormIterator>
+            <TextInput label="参数名称" source="parametername" />
+            <TextInput label="参数描述" source="description" />
+            <TextInput label="示例" source="example" />
+          </SimpleFormIterator>
+        </ArrayInput>
       </FormTab>
       <FormTab label="输出数据说明">
-        <TextInput
-          label="参数名称"
-          source="output1"
-          formClassName={classes.first_name}
+        <RichTextInput
+          toolbar={null}
+          label="输出数据说明"
+          source="outputexample"
         />
       </FormTab>
     </TabbedForm>
@@ -200,34 +202,31 @@ export const ApiEdit = withStyles(editStyles)(({ classes, ...props }) => (
 export const ApiCreate = withStyles(editStyles)(({ classes, ...props }) => (
   <Create {...props}>
     <TabbedForm toolbar={<ApiEditToolbar />}>
-      <FormTab label="resources.apis.tabs.createInfo">
+      <FormTab label="基本信息">
         <TextInput label="接口名称" source="apiname" />
-        <TextInput label="所属应用系统" source="appname" />
-        <TextInput label="接口版本" source="version" />
-        <TextInput label="接口协议" source="transfer" />
-        <TextInput label="接口状态" source="status" />
+        <TextInput label="接口版本" source="edition" />
+        <SegmentInput label="所属应用系统" source="appid" />
+        <SegmentInput label="接口协议" source="transfer" />
+        <SegmentInput label="接口状态" source="cyclestatusid" />
         <TextInput label="备注" source="remarks" />
       </FormTab>
       <FormTab label="接口地址">
         <TextInput label="接口地址" source="url" />
       </FormTab>
-      <FormTab label="输入参数说明">
-        <TextInput
-          label="参数名称"
-          source="args1"
-          formClassName={classes.first_name}
-        />
-        <TextInput
-          label="参数约束"
-          source="argsr1"
-          formClassName={classes.last_name}
-        />
+      <FormTab label="输入参数说明" style={{ width: "100%" }}>
+        <ArrayInput label="参数表" source="args">
+          <SimpleFormIterator>
+            <TextInput label="参数名称" source="parametername" />
+            <TextInput label="参数描述" source="description" />
+            <TextInput label="示例" source="example" />
+          </SimpleFormIterator>
+        </ArrayInput>
       </FormTab>
       <FormTab label="输出数据说明">
-        <TextInput
-          label="参数名称"
-          source="output1"
-          formClassName={classes.first_name}
+        <RichTextInput
+          toolbar={null}
+          label="输出数据说明"
+          source="outputexample"
         />
       </FormTab>
     </TabbedForm>
@@ -239,35 +238,28 @@ export const ApiShow = withStyles(editStyles)(({ classes, ...props }) => (
     <TabbedShowLayout>
       <Tab label="基本信息">
         <TextField label="接口名称" source="apiname" />
-        <TextField label="所属应用系统" source="appname" />
-        <TextField label="接口版本" source="version" />
-        <TextField label="接口协议" source="transfer" />
-        <TextField label="接口状态" source="status" />
-        <TextField label="最新修改时间" source="modifydate" />
-        <TextField label="最新修改人" source="modifyuser" />
+        <TextField label="接口版本" source="edition" />
+        <SegmentsField label="所属应用系统" source="appname" />
+        <SegmentsField label="接口协议" source="transfer" />
+        <SegmentsField label="接口状态" source="cyclestatus" />
+        <TextField label="最新修改时间" source="apilastmodifytime" />
+        <TextField label="最新修改人" source="apilastmodifier" />
         <TextField label="备注" source="remarks" />
       </Tab>
       <FormTab label="接口地址">
         <TextField label="接口地址" source="url" />
       </FormTab>
-      <FormTab label="输入参数说明">
-        <TextField
-          label="参数名称"
-          source="args1"
-          formClassName={classes.first_name}
-        />
-        <TextField
-          label="参数约束"
-          source="argsr1"
-          formClassName={classes.last_name}
-        />
+      <FormTab label="输入参数说明" style={{ width: "100%" }}>
+        <ArrayField label="参数表" source="args">
+          <Datagrid>
+            <TextField label="参数名称" source="parametername" />
+            <TextField label="参数描述" source="description" />
+            <TextField label="示例" source="example" />
+          </Datagrid>
+        </ArrayField>
       </FormTab>
       <FormTab label="输出数据说明">
-        <TextField
-          label="参数名称"
-          source="output1"
-          formClassName={classes.first_name}
-        />
+        <RichTextField label="参数名称" source="outputexample" />
       </FormTab>
     </TabbedShowLayout>
   </Show>

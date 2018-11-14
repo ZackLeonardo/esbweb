@@ -31,7 +31,7 @@ const TranslatedSegmentInput = compose(
 )(SegmentInput);
 
 TranslatedSegmentInput.defaultProps = {
-  source: "apiid"
+  source: "id"
 };
 
 export default TranslatedSegmentInput;

@@ -29,6 +29,7 @@ import SegmentsField from "./SegmentsField";
 import SegmentsInput from "./SegmentsInput";
 import MobileGrid from "./MobileGrid";
 import LinkedTo from "./LinkedTo";
+import dataProviderFactory from "../dataProvider";
 
 export const AppIcon = Icon;
 
@@ -91,19 +92,22 @@ const AppActions = ({
     <RefreshButton label="刷新" />
     <Button
       label="同步"
-      onClick={dataProvider =>
-        dataProvider("GET_LIST", "appsUpdate", {
-          // filter: { isUpdate: ture },
-          pagination: { page: 1, perPage: 25 },
-          sort: { field: "appid", order: "ASC" }
-        })
+      onClick={() =>
+        dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
+          dataProvider =>
+            dataProvider("GET_LIST", "appsUpdate", {
+              // filter: { isUpdate: ture },
+              pagination: { page: 1, perPage: 25 },
+              sort: { field: "appid", order: "ASC" }
+            })
+        )
       }
     />
   </CardActions>
 );
 
 export const AppList = withStyles(listStyles)(
-  ({ classes, record, ...props }) => (
+  ({ classes, record, dataProvider, ...props }) => (
     <List
       {...props}
       filters={<AppFilter />}
