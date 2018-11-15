@@ -30,6 +30,8 @@ import Icon from "@material-ui/icons/Error";
 
 import FullNameField from "./FullNameField";
 import MobileGrid from "./MobileGrid";
+import SegmentsField from "./SegmentsField";
+import ErrorDetailLinkField from "./ErrorDetailLinkField";
 
 export const ErrorIcon = Icon;
 
@@ -107,8 +109,9 @@ export const ErrorList = withStyles(listStyles)(({ classes, ...props }) => (
         <Datagrid>
           <TextField label="ID" source="id" />
           <TextField label="接口名称" source="apiname" />
-          <TextField label="异常情况" source="error" />
+          <SegmentsField label="异常情况" source="error" />
           <TextField label="异常时间" source="time" />
+          <ErrorDetailLinkField label="查看日志信息" source="logid" />
         </Datagrid>
       }
     />

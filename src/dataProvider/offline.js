@@ -126,9 +126,7 @@ const dataProvider = fakeDataProvider({
   logs: [
     {
       id: 0,
-      apiid: 1,
       apiname: "getAllUsers",
-      appid: "yhgl",
       appname: "用户管理",
       result: "成功",
       start: "2018/10/10 09:00:00:00",
@@ -141,9 +139,6 @@ const dataProvider = fakeDataProvider({
     {
       id: 1,
       apiname: "getAllUsers",
-      apiid: 1,
-      apiname: "getAllUsers",
-      appid: "yhgl",
       appname: "用户管理",
       result: "成功",
       start: "2018/10/10 09:00:00:20",
@@ -158,8 +153,9 @@ const dataProvider = fakeDataProvider({
     {
       id: 1,
       apiname: "getAllUsers",
-      error: "响应超时",
-      time: "2018/10/29 09:00:00:12"
+      error: "error",
+      time: "2018/10/29 09:00:00:12",
+      logid: 1
     }
   ],
   appsUpdate: []
