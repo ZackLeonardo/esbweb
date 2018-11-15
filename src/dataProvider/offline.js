@@ -21,14 +21,14 @@ const dataProvider = fakeDataProvider({
   ],
   apps: [
     {
-      appid: 0,
+      appid: "yhgl",
       appname: "用户管理",
       status: "启用",
       remarks: "无",
       apimanager: ["孙文成"]
     },
     {
-      appid: 1,
+      appid: "qxgl",
       appname: "权限管理",
       status: "启用",
       remarks: "无",
@@ -37,9 +37,9 @@ const dataProvider = fakeDataProvider({
   ],
   apis: [
     {
-      apiid: 0,
+      id: 0,
       apiname: "getAllUsers",
-      appid: 0,
+      appid: "yhgl",
       appname: "用户管理",
       edition: "1.0",
       transfer: "restful",
@@ -68,10 +68,10 @@ const dataProvider = fakeDataProvider({
       ]
     },
     {
-      apiid: 1,
+      id: 1,
       apiname: "getAllOrgs",
       appname: "用户管理",
-      appid: 0,
+      appid: "yhgl",
       edition: "1.0",
       transfer: "http",
       cyclestatusid: "1",
@@ -101,14 +101,26 @@ const dataProvider = fakeDataProvider({
   ],
   subs: [
     {
+      id: 0,
       apiname: "getAllOrgs",
+      appid: "yhgl",
       appname: "用户管理",
-      user: "孙文成"
+      apiappid: "yhgl",
+      apiappname: "用户管理",
+      subscribedate: "",
+      operator: "孙文成",
+      accesstoken: ""
     },
     {
+      id: 1,
       apiname: "getAllOrgs",
+      appid: "yhgl",
       appname: "用户管理",
-      user: "孙文成"
+      apiappid: "yhgl",
+      apiappname: "用户管理",
+      subscribedate: "",
+      operator: "孙文成",
+      accesstoken: ""
     }
   ],
   logs: [
