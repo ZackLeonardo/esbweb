@@ -126,25 +126,32 @@ const dataProvider = fakeDataProvider({
   logs: [
     {
       id: 0,
+      apiid: 1,
       apiname: "getAllUsers",
-      appname: "行政办公",
+      appid: "yhgl",
+      appname: "用户管理",
       result: "成功",
       start: "2018/10/10 09:00:00:00",
       end: "2018/10/10 09:00:00:10",
       spend: "10ms",
       args: "无",
-      response: "{data: {...}}"
+      response: "{data: {...}}",
+      details: ""
     },
     {
       id: 1,
       apiname: "getAllUsers",
-      appname: "行政办公",
+      apiid: 1,
+      apiname: "getAllUsers",
+      appid: "yhgl",
+      appname: "用户管理",
       result: "成功",
       start: "2018/10/10 09:00:00:20",
       end: "2018/10/10 09:00:00:30",
       spend: "10ms",
       args: "无",
-      response: "{data: {...}}"
+      response: "{data: {...}}",
+      details: ""
     }
   ],
   errors: [

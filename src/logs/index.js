@@ -27,7 +27,8 @@ import {
   RefreshButton,
   SaveButton,
   CreateButton,
-  Toolbar
+  Toolbar,
+  RichTextField
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/TextFields";
@@ -42,7 +43,6 @@ export const LogIcon = Icon;
 const LogFilter = props => (
   <Filter {...props}>
     <SearchInput source="q" alwaysOn />
-    <SegmentInput alwaysOn />
   </Filter>
 );
 
@@ -120,7 +120,7 @@ export const LogList = withStyles(listStyles)(({ classes, ...props }) => (
           <TextField label="结束调用时间" source="end" />
           <TextField label="耗时" source="spend" />
           <TextField label="输入参数" source="args" />
-          <TextField label="返回结果" source="response" />
+          <RichTextField label="返回结果" source="response" />
           <LogdetailLinkField />
         </Datagrid>
       }
@@ -150,7 +150,7 @@ export const LogShow = withStyles(editStyles)(({ classes, ...props }) => (
   <Show {...props}>
     <TabbedShowLayout>
       <Tab label="详细日志信息">
-        <div>这里显示详细日志信息。</div>
+        <RichTextField label="日志如下：" source="response" />
       </Tab>
     </TabbedShowLayout>
   </Show>
