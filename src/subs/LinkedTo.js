@@ -8,9 +8,10 @@ class LinkedTo extends React.Component {
   render() {
     const { record, source, label } = this.props;
     return (
+      //filter=%7B"q"%3A"getAllOrgs"%7D&order=DESC&page=1&perPage=25&sort=id
       <Link
         to={{
-          pathname: `/apis?filter={"appid": "${get(
+          pathname: `/apis?filter={"id": "${get(
             record,
             source
           )}"}&order=DESC&page=1&perPage=25&sort=id`

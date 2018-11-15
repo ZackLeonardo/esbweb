@@ -35,7 +35,7 @@ import Icon from "@material-ui/icons/Flag";
 
 import FullNameField from "./FullNameField";
 import SegmentInput from "./SegmentInput";
-import ApiLinkField from "./ApiLinkField";
+import LinkedTo from "./LinkedTo";
 import MobileGrid from "./MobileGrid";
 import dataProviderFactory from "../dataProvider";
 import SegmentsField from "./SegmentsField";
@@ -126,7 +126,7 @@ export const SubList = withStyles(listStyles)(({ classes, ...props }) => (
             showTime
           />
           <TextField label="订阅令牌" source="accesstoken" />
-          <ApiLinkField />
+          <LinkedTo label="接口信息" source="id" />
           {1 > 0 ? <EditButton /> : null}
         </Datagrid>
       }
@@ -245,8 +245,28 @@ export const SubCreate = withStyles(editStyles)(({ classes, ...props }) => (
   <Create {...props}>
     <TabbedForm toolbar={<SubEditToolbar />}>
       <FormTab label="接口订阅">
-        <TextInput label="发起订阅APP" source="appname" />
-        <TextInput label="订阅接口" source="apiname" />
+        <SegmentInput label="发起订阅APP" source="appid" />
+        <SegmentInput label="被订阅APP" source="apiappid" />
+        <FormDataConsumer>
+          {({ formData, ...rest }) => {
+            console.log("formData: " + formData.apiappid);
+            // if (this.state.appid !== formData.apiappid) {
+            //   this.setState({
+            //     appid: formData.apiappid
+            //   });
+            // }
+
+            return (
+              <SegmentInput
+                label="订阅接口"
+                source="id"
+                appid={formData.apiappid}
+                // yy={this.getApisFor(formData.apiappid)}
+                {...rest}
+              />
+            );
+          }}
+        </FormDataConsumer>
       </FormTab>
     </TabbedForm>
   </Create>
