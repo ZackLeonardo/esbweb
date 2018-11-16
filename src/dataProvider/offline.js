@@ -102,6 +102,7 @@ const dataProvider = fakeDataProvider({
   subs: [
     {
       id: 0,
+      apiid: 1,
       apiname: "getAllOrgs",
       appid: "yhgl",
       appname: "用户管理",
@@ -113,6 +114,7 @@ const dataProvider = fakeDataProvider({
     },
     {
       id: 1,
+      apiid: 1,
       apiname: "getAllOrgs",
       appid: "yhgl",
       appname: "用户管理",
@@ -126,6 +128,7 @@ const dataProvider = fakeDataProvider({
   logs: [
     {
       id: 0,
+      apiid: 0,
       apiname: "getAllUsers",
       appname: "用户管理",
       result: "成功",

@@ -28,7 +28,9 @@ import {
   SaveButton,
   CreateButton,
   Toolbar,
-  FormDataConsumer
+  FormDataConsumer,
+  SelectInput,
+  SimpleForm
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Flag";
@@ -159,75 +161,137 @@ const SubEditToolbar = props => (
   </Toolbar>
 );
 
-// const getApisFor = appid => {
-//   console.log("getApisFor: " + appid);
-//   dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
-//     //process.env.REACT_APP_DATA_PROVIDER
-//     dataProvider => {
-//       dataProvider("GET_LIST", "apis", {
-//         filter: { appid: appid },
-//         pagination: { page: 1, perPage: 9999 },
-//         sort: { field: "id", order: "ASC" }
-//       })
-//         .then(response => response.data)
-//         .then(items =>
-//           items.map(item => {
-//             return { id: item.id, name: item.apiname };
-//           })
-//         )
-//         .then(segments => segments);
-//     }
-//   );
-// };
-
-// export const SubEdit = withStyles(editStyles)(({ classes, ...props }) => (
-//   <Edit {...props}>
-//     <TabbedForm toolbar={<SubEditToolbar />}>
-//       <FormTab label="接口订阅">
-//         <SegmentInput label="发起订阅APP" source="appname" />
-//         <SegmentInput label="被订阅APP" source="apiappname" name="apiappname" />
-//         <FormDataConsumer>
-//           {({ formData, ...rest }) => (
-//             <SegmentInput
-//               label="订阅接口"
-//               source="apiname"
-//               apiappname={formData.apiappname}
-//               choices={getApisFor(formData.apiappname)}
-//               {...rest}
-//             />
-//           )}
-//         </FormDataConsumer>
-//       </FormTab>
-//     </TabbedForm>
-//   </Edit>
-// ));
-
 export class SubEdit extends React.Component {
   state = {
-    appid: null
+    apiSegments: null
   };
+
+  componentDidMount = () => {
+    dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
+      //process.env.REACT_APP_DATA_PROVIDER
+      dataProvider => {
+        dataProvider("GET_LIST", "apis", {
+          // filter: { appid: this.state.appid },
+          pagination: { page: 1, perPage: 9999 },
+          sort: { field: "id", order: "ASC" }
+        })
+          .then(response => response.data)
+          .then(
+            items => {
+              let apiSegments = new Map();
+              for (let item of items) {
+                if (!apiSegments[item.appid]) {
+                  apiSegments[item.appid] = [];
+                }
+                apiSegments[item.appid].push({
+                  id: item.id,
+                  name: item.apiname
+                });
+              }
+
+              this.setState({
+                apiSegments: apiSegments
+              });
+            }
+            // items.foreach(item => {
+
+            // return { id: item.id, name: item.apiname };
+            // })
+          );
+      }
+    );
+  };
+
+  getApisFor(appid) {
+    return this.state.apiSegments ? this.state.apiSegments[appid] : [];
+  }
 
   render() {
     return (
       <Edit {...this.props}>
+        <SimpleForm label="接口订阅" toolbar={<SubEditToolbar />}>
+          <SegmentInput label="发起订阅APP" source="appid" />
+          <SegmentInput label="被订阅APP" source="apiappid" />
+          <FormDataConsumer>
+            {({ formData, getSource, ...rest }) => {
+              return (
+                <SelectInput
+                  label="订阅接口"
+                  source="apiid"
+                  choices={this.getApisFor(formData.apiappid)}
+                  // appid={formData.apiappid}
+                  // yy={this.getApisFor(formData.apiappid)}
+                  {...rest}
+                />
+              );
+            }}
+          </FormDataConsumer>
+        </SimpleForm>
+      </Edit>
+    );
+  }
+}
+
+export class SubCreate extends React.Component {
+  state = {
+    apiSegments: null
+  };
+
+  componentWillMount = () => {
+    dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
+      //process.env.REACT_APP_DATA_PROVIDER
+      dataProvider => {
+        dataProvider("GET_LIST", "apis", {
+          // filter: { appid: this.state.appid },
+          pagination: { page: 1, perPage: 9999 },
+          sort: { field: "id", order: "ASC" }
+        })
+          .then(response => response.data)
+          .then(
+            items => {
+              let apiSegments = new Map();
+              for (let item of items) {
+                if (!apiSegments[item.appid]) {
+                  apiSegments[item.appid] = [];
+                }
+                apiSegments[item.appid].push({
+                  id: item.id,
+                  name: item.apiname
+                });
+              }
+
+              this.setState({
+                apiSegments: apiSegments
+              });
+            }
+            // items.foreach(item => {
+
+            // return { id: item.id, name: item.apiname };
+            // })
+          );
+      }
+    );
+  };
+
+  getApisFor(appid) {
+    return this.state.apiSegments ? this.state.apiSegments[appid] : [];
+  }
+
+  render() {
+    return (
+      <Create {...this.props}>
         <TabbedForm toolbar={<SubEditToolbar />}>
           <FormTab label="接口订阅">
             <SegmentInput label="发起订阅APP" source="appid" />
             <SegmentInput label="被订阅APP" source="apiappid" />
             <FormDataConsumer>
-              {({ formData, ...rest }) => {
-                console.log("formData: " + formData.apiappid);
-                // if (this.state.appid !== formData.apiappid) {
-                //   this.setState({
-                //     appid: formData.apiappid
-                //   });
-                // }
-
+              {({ formData, getSource, ...rest }) => {
                 return (
-                  <SegmentInput
+                  <SelectInput
                     label="订阅接口"
-                    source="id"
-                    appid={formData.apiappid}
+                    source="apiid"
+                    choices={this.getApisFor(formData.apiappid)}
+                    // appid={formData.apiappid}
                     // yy={this.getApisFor(formData.apiappid)}
                     {...rest}
                   />
@@ -236,38 +300,7 @@ export class SubEdit extends React.Component {
             </FormDataConsumer>
           </FormTab>
         </TabbedForm>
-      </Edit>
+      </Create>
     );
   }
 }
-
-export const SubCreate = withStyles(editStyles)(({ classes, ...props }) => (
-  <Create {...props}>
-    <TabbedForm toolbar={<SubEditToolbar />}>
-      <FormTab label="接口订阅">
-        <SegmentInput label="发起订阅APP" source="appid" />
-        <SegmentInput label="被订阅APP" source="apiappid" />
-        <FormDataConsumer>
-          {({ formData, ...rest }) => {
-            console.log("formData: " + formData.apiappid);
-            // if (this.state.appid !== formData.apiappid) {
-            //   this.setState({
-            //     appid: formData.apiappid
-            //   });
-            // }
-
-            return (
-              <SegmentInput
-                label="订阅接口"
-                source="id"
-                appid={formData.apiappid}
-                // yy={this.getApisFor(formData.apiappid)}
-                {...rest}
-              />
-            );
-          }}
-        </FormDataConsumer>
-      </FormTab>
-    </TabbedForm>
-  </Create>
-));

@@ -12,11 +12,6 @@ const ErrorDetailLinkField = props => {
           record,
           source
         )}"}&order=DESC&page=1&perPage=25&sort=id`
-        // search: stringify({
-        //   page: 1,
-        //   perPage: 25,
-        //   filter: JSON.stringify({ appid: records.appid })
-        // })
       }}
       label={label}
     >
