@@ -41,7 +41,7 @@ import FullNameField from "./FullNameField";
 import SegmentsField from "./SegmentsField";
 import SegmentInput from "./SegmentInput";
 import ApidetailLinkField from "./ApidetailLinkField";
-import ApiLogLinkField from "./ApiLogLinkField";
+import LinkedTo from "./LinkedTo";
 import MobileGrid from "./MobileGrid";
 
 export const ApiIcon = Icon;
@@ -129,7 +129,7 @@ export const ApiList = withStyles(listStyles)(({ classes, ...props }) => (
           <TextField label="最新修改人" source="apilastmodifier" />
           <TextField label="备注" source="remarks" />
           <ApidetailLinkField />
-          <ApiLogLinkField />
+          <LinkedTo label="调用日志" source="id" />
           {/* <Link to={`/apidetails/1`} label={"详细信息"}>
             详细信息
           </Link> */}

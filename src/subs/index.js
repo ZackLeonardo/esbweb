@@ -128,7 +128,7 @@ export const SubList = withStyles(listStyles)(({ classes, ...props }) => (
             showTime
           />
           <TextField label="订阅令牌" source="accesstoken" />
-          <LinkedTo label="接口信息" source="id" />
+          <LinkedTo label="接口信息" source="apiid" />
           {1 > 0 ? <EditButton /> : null}
         </Datagrid>
       }

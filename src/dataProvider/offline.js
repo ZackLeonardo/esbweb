@@ -127,8 +127,8 @@ const dataProvider = fakeDataProvider({
   ],
   logs: [
     {
-      id: 0,
-      apiid: 0,
+      id: "0",
+      apiid: "0",
       apiname: "getAllUsers",
       appname: "用户管理",
       result: "成功",
@@ -140,8 +140,9 @@ const dataProvider = fakeDataProvider({
       details: ""
     },
     {
-      id: 1,
-      apiname: "getAllUsers",
+      id: "1",
+      apiid: "1",
+      apiname: "getAllOrgs",
       appname: "用户管理",
       result: "成功",
       start: "2018/10/10 09:00:00:20",
@@ -158,7 +159,7 @@ const dataProvider = fakeDataProvider({
       apiname: "getAllUsers",
       error: "error",
       time: "2018/10/29 09:00:00:12",
-      logid: 1
+      logid: "1"
     }
   ],
   appsUpdate: []
