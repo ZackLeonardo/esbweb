@@ -76,42 +76,51 @@ class App extends Component {
         locale="zh"
         i18nProvider={i18nProvider}
       >
-        {permissions => [
-          permissions === "sysAdmin" ? (
+        {permissions => {
+          console.log(permissions);
+
+          return [
+            permissions.split(",").indexOf("sysAdmin") > -1 ? (
+              <Resource
+                name="users"
+                list={UserList}
+                edit={UserEdit}
+                create={UserCreate}
+                icon={UserIcon}
+              />
+            ) : null,
+            permissions.split(",").indexOf("sysAdmin") > -1 ? (
+              <Resource
+                name="apps"
+                list={AppList}
+                edit={AppEdit}
+                icon={AppIcon}
+              />
+            ) : null,
             <Resource
-              name="users"
-              list={UserList}
-              edit={UserEdit}
-              create={UserCreate}
-              icon={UserIcon}
-            />
-          ) : null,
-          permissions === "sysAdmin" ? (
+              name="apis"
+              list={ApiList}
+              edit={ApiEdit}
+              create={ApiCreate}
+              icon={ApiIcon}
+              show={ApiShow}
+            />,
             <Resource
-              name="apps"
-              list={AppList}
-              edit={AppEdit}
-              icon={AppIcon}
-            />
-          ) : null,
-          <Resource
-            name="apis"
-            list={ApiList}
-            edit={ApiEdit}
-            create={ApiCreate}
-            icon={ApiIcon}
-            show={ApiShow}
-          />,
-          <Resource
-            name="subs"
-            list={SubList}
-            edit={SubEdit}
-            create={SubCreate}
-            icon={SubIcon}
-          />,
-          <Resource name="logs" list={LogList} show={LogShow} icon={LogIcon} />,
-          <Resource name="errors" list={ErrorList} icon={ErrorIcon} />
-        ]}
+              name="subs"
+              list={SubList}
+              edit={SubEdit}
+              create={SubCreate}
+              icon={SubIcon}
+            />,
+            <Resource
+              name="logs"
+              list={LogList}
+              show={LogShow}
+              icon={LogIcon}
+            />,
+            <Resource name="errors" list={ErrorList} icon={ErrorIcon} />
+          ];
+        }}
       </Admin>
     );
   }

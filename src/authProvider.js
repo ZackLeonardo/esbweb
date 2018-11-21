@@ -8,27 +8,31 @@ import {
 
 export default (type, params) => {
   if (type === AUTH_LOGIN) {
-    // const { username, password } = params;
-    // const request = new Request("https://mydomain.com/authenticate", {
-    //   method: "POST",
-    //   body: JSON.stringify({ username, password }),
-    //   headers: new Headers({ "Content-Type": "application/json" })
-    // });
-    // return fetch(request)
-    //   .then(response => {
-    //     if (response.status < 200 || response.status >= 300) {
-    //       throw new Error(response.statusText);
-    //     }
-    //     return response.json();
-    //   })
-    //   .then(({ token }) => {
-    //     localStorage.setItem("token", token);
-    //   });
-    const { username } = params;
-    localStorage.setItem("username", username);
-    localStorage.setItem("role", "sysAdmin");
-    // accept all username/password combinations
-    return Promise.resolve();
+    const { username, password } = params;
+    const request = new Request("http://172.30.201.83:8080/esb/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+      headers: new Headers({ "Content-Type": "application/json" })
+    });
+    return fetch(request)
+      .then(response => {
+        if (response.status < 200 || response.status >= 300) {
+          throw new Error(response.error);
+          // return Promise.reject(response.error);
+        }
+        let test = response.json();
+        return test;
+      })
+      .then(({ status, error, token, role }) => {
+        if (status !== "ok") {
+          return Promise.reject(error);
+        } else {
+          localStorage.setItem("username", username);
+          localStorage.setItem("token", token);
+          localStorage.setItem("role", role);
+        }
+      });
+    // return Promise.resolve();
   }
   if (type === AUTH_LOGOUT) {
     localStorage.removeItem("username");
