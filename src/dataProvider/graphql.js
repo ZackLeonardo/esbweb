@@ -25,7 +25,7 @@ export default () => {
 
     return buildApolloClient({
         clientOptions: {
-            uri: 'http://localhost:4000/graphql',
+            uri: 'http://172.30.201.83:4000/graphql',
         },
     }).then(dataProvider => (type, resource, params) =>
         dataProvider(type, getGqlResource(resource), params)
