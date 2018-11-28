@@ -11,7 +11,7 @@ const httpClient = (url, options = {}) => {
 };
 
 const restProvider = simpleRestProvider(
-  "http://172.30.201.71:8080/esb",
+  "http://localhost:8080/esb",
   httpClient
 );
 export default (type, resource, params) =>

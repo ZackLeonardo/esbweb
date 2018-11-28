@@ -116,8 +116,8 @@ export const LogList = withStyles(listStyles)(({ classes, ...props }) => (
           <TextField label="接口" source="apiname" />
           <TextField label="发起调用的APP" source="appname" />
           <TextField label="成功/失败" source="result" />
-          <TextField label="开始调用时间" source="start" />
-          <TextField label="结束调用时间" source="end" />
+          <DateField label="开始调用时间" source="start" type="date" showTime />
+          <DateField label="结束调用时间" source="end" type="date" showTime />
           <TextField label="耗时" source="spend" />
           <TextField label="输入参数" source="args" />
           <RichTextField label="返回结果" source="response" />

@@ -126,7 +126,12 @@ export const StoreList = withStyles(listStyles)(({ classes, ...props }) => (
           <TextField label="接口版本" source="edition" />
           <SegmentsField label="接口协议" source="transfer" />
           <SegmentsField label="接口状态" source="cyclestatus" />
-          <TextField label="最新修改时间" source="apilastmodifytime" />
+          <DateField
+            label="最新修改时间"
+            source="apilastmodifytime"
+            type="date"
+            showTime
+          />
           <TextField label="最新修改人" source="apilastmodifier" />
           <TextField label="备注" source="remarks" />
           <ApidetailLinkField />
@@ -161,7 +166,12 @@ export const StoreShow = withStyles(editStyles)(({ classes, ...props }) => (
         <SegmentsField label="所属应用系统" source="appname" />
         <SegmentsField label="接口协议" source="transfer" />
         <SegmentsField label="接口状态" source="cyclestatus" />
-        <TextField label="最新修改时间" source="apilastmodifytime" />
+        <DateField
+          label="最新修改时间"
+          source="apilastmodifytime"
+          type="date"
+          showTime
+        />
         <TextField label="最新修改人" source="apilastmodifier" />
         <TextField label="备注" source="remarks" />
       </Tab>
