@@ -119,6 +119,7 @@ export const SubList = withStyles(listStyles)(({ classes, ...props }) => (
         <Datagrid>
           <SegmentsField label="发起订阅APP" source="appname" />
           <SegmentsField label="被订阅APP" source="apiappname" />
+          <TextField label="订阅接口ID" source="apiid" />
           <SegmentsField label="订阅接口" source="apiname" />
           <TextField label="订阅操作人" source="operator" />
           <DateField
@@ -128,7 +129,7 @@ export const SubList = withStyles(listStyles)(({ classes, ...props }) => (
             showTime
           />
           <TextField label="订阅令牌" source="accesstoken" />
-          <LinkedTo label="接口信息" source="apiname" />
+          <LinkedTo label="接口信息" source="apiid" />
           {1 > 0 ? <EditButton /> : null}
         </Datagrid>
       }
@@ -173,7 +174,8 @@ export class SubEdit extends React.Component {
         dataProvider("GET_LIST", "apis", {
           // filter: { appid: this.state.appid },
           pagination: { page: 1, perPage: 9999 },
-          sort: { field: "id", order: "ASC" }
+          sort: { field: "id", order: "ASC" },
+          flag: "1"
         })
           .then(response => response.data)
           .then(
@@ -244,7 +246,8 @@ export class SubCreate extends React.Component {
         dataProvider("GET_LIST", "apis", {
           // filter: { appid: this.state.appid },
           pagination: { page: 1, perPage: 9999 },
-          sort: { field: "id", order: "ASC" }
+          sort: { field: "id", order: "ASC" },
+          flag: "1"
         })
           .then(response => response.data)
           .then(

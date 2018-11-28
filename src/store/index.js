@@ -34,7 +34,7 @@ import {
   SimpleFormIterator
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Icon from "@material-ui/icons/Add";
+import Icon from "@material-ui/icons/BubbleChart"; //AddShoppingCart
 import RichTextInput from "ra-input-rich-text";
 
 import FullNameField from "./FullNameField";
@@ -42,10 +42,9 @@ import SegmentsField from "./SegmentsField";
 import SegmentInput from "./SegmentInput";
 import ApidetailLinkField from "./ApidetailLinkField";
 import LinkedTo from "./LinkedTo";
-import LinkedToSubs from "./LinkedToSubs";
 import MobileGrid from "./MobileGrid";
 
-export const ApiIcon = Icon;
+export const StoreIcon = Icon;
 
 const ApiFilter = props => (
   <Filter {...props}>
@@ -104,18 +103,18 @@ const ApiActions = ({
         filterValues,
         context: "button"
       })}
-    <CreateButton basePath={basePath} />
     <RefreshButton />
   </CardActions>
 );
 
-export const ApiList = withStyles(listStyles)(({ classes, ...props }) => (
+export const StoreList = withStyles(listStyles)(({ classes, ...props }) => (
   <List
     {...props}
     filters={<ApiFilter />}
     sort={{ field: "id", order: "DESC" }}
     perPage={25}
     actions={<ApiActions />}
+    bulkActionButtons={false}
   >
     <Responsive
       xsmall={<MobileGrid />}
@@ -127,24 +126,15 @@ export const ApiList = withStyles(listStyles)(({ classes, ...props }) => (
           <TextField label="接口版本" source="edition" />
           <SegmentsField label="接口协议" source="transfer" />
           <SegmentsField label="接口状态" source="cyclestatus" />
-          <DateField label="最新修改时间" source="apilastmodifytime" />
+          <TextField label="最新修改时间" source="apilastmodifytime" />
           <TextField label="最新修改人" source="apilastmodifier" />
           <TextField label="备注" source="remarks" />
           <ApidetailLinkField />
-          <LinkedTo label="调用日志" source="id" />
-          <LinkedToSubs label="订阅情况" source="id" />
-          {/* <Link to={`/apidetails/1`} label={"详细信息"}>
-            详细信息
-          </Link> */}
-          {1 > 0 ? <EditButton /> : null}
         </Datagrid>
       }
     />
   </List>
 ));
-
-const ApiTitle = ({ record }) =>
-  record ? <FullNameField record={record} size={32} /> : null;
 
 const editStyles = {
   first_name: { display: "inline-block" },
@@ -161,83 +151,7 @@ const editStyles = {
   }
 };
 
-const ApiEditToolbar = props => (
-  <Toolbar {...props}>
-    <SaveButton />
-    <Button component={Link} to={`/apis`} label={"返回"} />
-  </Toolbar>
-);
-
-export const ApiEdit = withStyles(editStyles)(({ classes, ...props }) => (
-  <Edit {...props}>
-    <TabbedForm toolbar={<ApiEditToolbar />} style={{ width: "100%" }}>
-      <FormTab label="基本信息">
-        <TextField label="接口ID" source="id" />
-        <TextInput label="接口名称" source="apiname" />
-        <TextInput label="接口版本" source="edition" />
-        <SegmentInput label="所属应用系统" source="appid" />
-        <SegmentInput label="接口协议" source="transfer" />
-        <SegmentInput label="接口状态" source="cyclestatusid" />
-        <TextInput label="备注" source="remarks" />
-      </FormTab>
-      <FormTab label="接口地址">
-        <TextInput label="接口地址" source="url" />
-      </FormTab>
-      <FormTab label="输入参数说明" style={{ width: "100%" }}>
-        <ArrayInput label="参数表" source="args">
-          <SimpleFormIterator>
-            <TextInput label="参数名称" source="parametername" />
-            <TextInput label="参数描述" source="description" />
-            <TextInput label="示例" source="example" />
-          </SimpleFormIterator>
-        </ArrayInput>
-      </FormTab>
-      <FormTab label="输出数据说明">
-        <RichTextInput
-          toolbar={null}
-          label="输出数据说明"
-          source="outputexample"
-        />
-      </FormTab>
-    </TabbedForm>
-  </Edit>
-));
-
-export const ApiCreate = withStyles(editStyles)(({ classes, ...props }) => (
-  <Create {...props}>
-    <TabbedForm toolbar={<ApiEditToolbar />}>
-      <FormTab label="基本信息">
-        <TextInput label="接口名称" source="apiname" />
-        <TextInput label="接口版本" source="edition" />
-        <SegmentInput label="所属应用系统" source="appid" />
-        <SegmentInput label="接口协议" source="transfer" />
-        <SegmentInput label="接口状态" source="cyclestatusid" />
-        <TextInput label="备注" source="remarks" />
-      </FormTab>
-      <FormTab label="接口地址">
-        <TextInput label="接口地址" source="url" />
-      </FormTab>
-      <FormTab label="输入参数说明" style={{ width: "100%" }}>
-        <ArrayInput label="参数表" source="args">
-          <SimpleFormIterator>
-            <TextInput label="参数名称" source="parametername" />
-            <TextInput label="参数描述" source="description" />
-            <TextInput label="示例" source="example" />
-          </SimpleFormIterator>
-        </ArrayInput>
-      </FormTab>
-      <FormTab label="输出数据说明">
-        <RichTextInput
-          toolbar={null}
-          label="输出数据说明"
-          source="outputexample"
-        />
-      </FormTab>
-    </TabbedForm>
-  </Create>
-));
-
-export const ApiShow = withStyles(editStyles)(({ classes, ...props }) => (
+export const StoreShow = withStyles(editStyles)(({ classes, ...props }) => (
   <Show {...props}>
     <TabbedShowLayout>
       <Tab label="基本信息">

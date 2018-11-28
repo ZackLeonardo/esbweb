@@ -8,7 +8,7 @@ const ErrorDetailLinkField = props => {
   return (
     <Link
       to={{
-        pathname: `/logs?filter={"id": "${get(
+        pathname: `/logs?filter={"q": "${get(
           record,
           source
         )}"}&order=DESC&page=1&perPage=25&sort=id`

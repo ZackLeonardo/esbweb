@@ -11,7 +11,7 @@ class LinkedTo extends React.Component {
       //filter=%7B"q"%3A"getAllOrgs"%7D&order=DESC&page=1&perPage=25&sort=id
       <Link
         to={{
-          pathname: `/store?filter={"q": "${get(
+          pathname: `/logs?filter={"apiid":"${get(
             record,
             source
           )}"}&order=DESC&page=1&perPage=25&sort=id`

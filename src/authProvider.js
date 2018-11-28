@@ -9,7 +9,7 @@ import {
 export default (type, params) => {
   if (type === AUTH_LOGIN) {
     const { username, password } = params;
-    const request = new Request("http://172.30.201.83:8080/esb/login", {
+    const request = new Request("http://172.30.201.71:8080/esb/login", {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: new Headers({ "Content-Type": "application/json" })
@@ -36,15 +36,15 @@ export default (type, params) => {
   }
   if (type === AUTH_LOGOUT) {
     localStorage.removeItem("username");
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
     return Promise.resolve();
   }
   if (type === AUTH_ERROR) {
     return Promise.resolve();
   }
   if (type === AUTH_CHECK) {
-    return localStorage.getItem("username")
-      ? Promise.resolve()
-      : Promise.reject();
+    return localStorage.getItem("token") ? Promise.resolve() : Promise.reject();
   }
   if (type === AUTH_GET_PERMISSIONS) {
     const role = localStorage.getItem("role");

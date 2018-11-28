@@ -16,6 +16,8 @@ import chineseMessages from "./i18n/zh";
 
 import { UserList, UserEdit, UserCreate, UserIcon } from "./users";
 import { AppList, AppEdit, AppIcon } from "./apps";
+import { StoreList, StoreShow, StoreIcon } from "./store";
+
 import { ApiList, ApiEdit, ApiCreate, ApiIcon, ApiShow } from "./apis";
 import { SubList, SubEdit, SubCreate, SubIcon } from "./subs";
 import { LogList, LogIcon, LogShow } from "./logs";
@@ -47,9 +49,9 @@ class App extends Component {
     this.setState({ dataProvider });
   }
 
-  componentWillUnmount() {
-    this.restoreFetch();
-  }
+  // componentWillUnmount() {
+  //   this.restoreFetch();
+  // }
 
   render() {
     const { dataProvider } = this.state;
@@ -77,10 +79,11 @@ class App extends Component {
         i18nProvider={i18nProvider}
       >
         {permissions => {
+          console.log("permissions");
           console.log(permissions);
 
           return [
-            permissions.split(",").indexOf("sysAdmin") > -1 ? (
+            permissions.indexOf("sysAdmin") > -1 ? (
               <Resource
                 name="users"
                 list={UserList}
@@ -89,14 +92,18 @@ class App extends Component {
                 icon={UserIcon}
               />
             ) : null,
-            permissions.split(",").indexOf("sysAdmin") > -1 ? (
-              <Resource
-                name="apps"
-                list={AppList}
-                edit={AppEdit}
-                icon={AppIcon}
-              />
-            ) : null,
+            <Resource
+              name="apps"
+              list={AppList}
+              edit={AppEdit}
+              icon={AppIcon}
+            />,
+            <Resource
+              name="store"
+              list={StoreList}
+              icon={StoreIcon}
+              show={StoreShow}
+            />,
             <Resource
               name="apis"
               list={ApiList}

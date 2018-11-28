@@ -25,7 +25,7 @@ class SegmentInput extends Component {
 
   componentWillMount = () => {
     const { source } = this.props;
-    if (source === "appid" || source === "apiappid") {
+    if (source === "appid") {
       dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
         //process.env.REACT_APP_DATA_PROVIDER
         dataProvider => {
@@ -43,6 +43,25 @@ class SegmentInput extends Component {
             .then(segments => this.setState({ segments: segments }));
         }
       );
+    } else if (source === "apiappid") {
+      dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
+        //process.env.REACT_APP_DATA_PROVIDER
+        dataProvider => {
+          dataProvider("GET_LIST", "apps", {
+            filter: { status: "启用" },
+            pagination: { page: 1, perPage: 9999 },
+            sort: { field: "appid", order: "ASC" },
+            flag: 1
+          })
+            .then(response => response.data)
+            .then(items =>
+              items.map(item => {
+                return { id: item.appid, name: item.appname };
+              })
+            )
+            .then(segments => this.setState({ segments: segments }));
+        }
+      );
     } else {
       dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
         //process.env.REACT_APP_DATA_PROVIDER
@@ -50,9 +69,9 @@ class SegmentInput extends Component {
           console.log(this.props.appid);
 
           dataProvider("GET_LIST", "apis", {
-            // filter: { appid: appid },
             pagination: { page: 1, perPage: 9999 },
-            sort: { field: "id", order: "ASC" }
+            sort: { field: "id", order: "ASC" },
+            flag: 1
           })
             .then(response => response.data)
             .then(items =>
@@ -84,7 +103,8 @@ class SegmentInput extends Component {
     dataProvider("GET_LIST", "apis", {
       filter: { appid: this.nextAppid },
       pagination: { page: 1, perPage: 9999 },
-      sort: { field: "id", order: "ASC" }
+      sort: { field: "id", order: "ASC" },
+      flag: 1
     })
       .then(response => response.data)
       .then(items =>

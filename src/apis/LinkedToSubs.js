@@ -11,10 +11,10 @@ class LinkedTo extends React.Component {
       //filter=%7B"q"%3A"getAllOrgs"%7D&order=DESC&page=1&perPage=25&sort=id
       <Link
         to={{
-          pathname: `/store?filter={"q": "${get(
+          pathname: `/subs?filter={"q":"${get(
             record,
             source
-          )}"}&order=DESC&page=1&perPage=25&sort=id`
+          )}"}&order=DESC&page=1&perPage=25&sort=id&flag=1`
           // search: stringify({
           //   page: 1,
           //   perPage: 25,

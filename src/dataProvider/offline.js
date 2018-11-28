@@ -35,9 +35,9 @@ const dataProvider = fakeDataProvider({
       apimanager: ["孙文成"]
     }
   ],
-  apis: [
+  store: [
     {
-      id: 0,
+      id: "0",
       apiname: "getAllUsers",
       appid: "yhgl",
       appname: "用户管理",
@@ -68,7 +68,71 @@ const dataProvider = fakeDataProvider({
       ]
     },
     {
-      id: 1,
+      id: "1",
+      apiname: "getAllOrgs",
+      appname: "用户管理",
+      appid: "yhgl",
+      edition: "1.0",
+      transfer: "http",
+      cyclestatusid: "1",
+      cyclestatus: "服务中",
+      apilastmodifytime: "2018/10/26 09:00:00",
+      apilastmodifier: "孙文成",
+      remarks: "获取所有机构信息",
+      args1: "status",
+      argsr1: "1或0",
+      outputexample: "{data: {username: 'ddd'}}",
+      url: "http://umc.dpm.org.cn",
+      args: [
+        {
+          id: 1,
+          parametername: "test",
+          description: "test",
+          example: "test"
+        },
+        {
+          id: 1,
+          parametername: "test1",
+          description: "test1",
+          example: "test1"
+        }
+      ]
+    }
+  ],
+  apis: [
+    {
+      id: "0",
+      apiname: "getAllUsers",
+      appid: "yhgl",
+      appname: "用户管理",
+      edition: "1.0",
+      transfer: "restful",
+      cyclestatusid: "1",
+      cyclestatus: "服务中",
+      apilastmodifytime: "2018/10/26 09:00:00",
+      apilastmodifier: "孙文成",
+      remarks: "获取所有用户信息",
+      args1: "status",
+      argsr1: "1或0",
+      outputexample: "{data: {username: 'ddd'}}",
+      url: "http://umc.dpm.org.cn/getAllUsers.do",
+      args: [
+        {
+          id: 1,
+          parametername: "test",
+          description: "test",
+          example: "test"
+        },
+        {
+          id: 1,
+          parametername: "test1",
+          description: "test1",
+          example: "test1"
+        }
+      ]
+    },
+    {
+      id: "1",
       apiname: "getAllOrgs",
       appname: "用户管理",
       appid: "yhgl",
@@ -102,7 +166,7 @@ const dataProvider = fakeDataProvider({
   subs: [
     {
       id: 0,
-      apiid: 1,
+      apiid: "0",
       apiname: "getAllOrgs",
       appid: "yhgl",
       appname: "用户管理",
@@ -114,8 +178,8 @@ const dataProvider = fakeDataProvider({
     },
     {
       id: 1,
-      apiid: 1,
-      apiname: "getAllOrgs",
+      apiid: "1",
+      apiname: "getAllOrgs1",
       appid: "yhgl",
       appname: "用户管理",
       apiappid: "yhgl",

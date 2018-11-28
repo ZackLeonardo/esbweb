@@ -8,12 +8,14 @@ import {
   DashboardMenuItem,
   MenuItemLink,
   Responsive,
-  getResources
+  getResources,
+  WithPermissions
 } from "react-admin";
 import { withRouter } from "react-router-dom";
 
 import { UserIcon } from "./users";
 import { AppIcon } from "./apps";
+import { StoreIcon } from "./store";
 import { ApiIcon } from "./apis";
 import { LogIcon } from "./logs";
 import { SubIcon } from "./subs";
@@ -22,6 +24,7 @@ import { ErrorIcon } from "./errors";
 const items = [
   { name: "users", icon: <UserIcon /> },
   { name: "apps", icon: <AppIcon /> },
+  { name: "store", icon: <StoreIcon /> },
   { name: "apis", icon: <ApiIcon /> },
   { name: "subs", icon: <SubIcon /> },
   { name: "logs", icon: <LogIcon /> },

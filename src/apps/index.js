@@ -33,6 +33,11 @@ import dataProviderFactory from "../dataProvider";
 
 export const AppIcon = Icon;
 
+const hasRole = arg => {
+  let roles = localStorage.getItem("role");
+  return roles.indexOf(arg) > -1;
+};
+
 const AppFilter = props => (
   <Filter {...props}>
     <SearchInput source="q" alwaysOn />
@@ -90,21 +95,30 @@ const AppActions = ({
         context: "button"
       })}
     <RefreshButton label="刷新" />
-    <Button
-      label="同步"
-      onClick={() =>
-        dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
-          dataProvider =>
-            dataProvider("GET_LIST", "appsUpdate", {
-              // filter: { isUpdate: ture },
-              pagination: { page: 1, perPage: 25 },
-              sort: { field: "appid", order: "ASC" }
-            })
-        )
-      }
-    />
+    {hasRole("sysAdmin") ? (
+      <Button
+        label="同步"
+        onClick={() =>
+          dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
+            dataProvider =>
+              dataProvider("GET_LIST", "appsUpdate", {
+                // filter: { isUpdate: ture },
+                pagination: { page: 1, perPage: 25 },
+                sort: { field: "appid", order: "ASC" }
+              })
+          )
+        }
+      />
+    ) : null}
   </CardActions>
 );
+
+const renderEditbutton = () => {
+  if (hasRole("sysAdmin")) {
+    return <EditButton />;
+  }
+  return null;
+};
 
 export const AppList = withStyles(listStyles)(
   ({ classes, record, dataProvider, ...props }) => (
@@ -124,8 +138,8 @@ export const AppList = withStyles(listStyles)(
             <TextField label="应用系统状态" source="status" />
             <SegmentsField label="发布管理" source="apimanager" />
             <TextField label="备注" source="remarks" />
-            <LinkedTo label="接口信息" source="appid" />
-            {1 > 0 ? <EditButton /> : null}
+            <LinkedTo label="接口发布" source="appid" />
+            {renderEditbutton()}
           </Datagrid>
         }
       />
