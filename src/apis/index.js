@@ -6,16 +6,12 @@ import {
   Tab,
   Datagrid,
   DateField,
-  DateInput,
   Edit,
   EditButton,
   Filter,
   FormTab,
   List,
-  LongTextInput,
-  NullableBooleanInput,
   NumberField,
-  ReferenceManyField,
   Responsive,
   SearchInput,
   TabbedForm,
@@ -37,7 +33,6 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Add";
 import RichTextInput from "ra-input-rich-text";
 
-import FullNameField from "./FullNameField";
 import SegmentsField from "./SegmentsField";
 import SegmentInput from "./SegmentInput";
 import ApidetailLinkField from "./ApidetailLinkField";
@@ -148,8 +143,8 @@ export const ApiList = withStyles(listStyles)(({ classes, ...props }) => (
   </List>
 ));
 
-const ApiTitle = ({ record }) =>
-  record ? <FullNameField record={record} size={32} /> : null;
+// const ApiTitle = ({ record }) =>
+//   record ? <FullNameField record={record} size={32} /> : null;
 
 const editStyles = {
   first_name: { display: "inline-block" },

@@ -1,34 +1,19 @@
 import React from "react";
 import {
-  Create,
   Datagrid,
   DateField,
-  DateInput,
-  Edit,
-  EditButton,
   Filter,
-  FormTab,
   List,
-  LongTextInput,
-  NullableBooleanInput,
   NumberField,
-  ReferenceManyField,
   Responsive,
   SearchInput,
-  TabbedForm,
   TextField,
-  TextInput,
-  Button,
-  Link,
   CardActions,
-  RefreshButton,
-  SaveButton,
-  Toolbar
+  RefreshButton
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Error";
 
-import FullNameField from "./FullNameField";
 import MobileGrid from "./MobileGrid";
 import SegmentsField from "./SegmentsField";
 import ErrorDetailLinkField from "./ErrorDetailLinkField";
@@ -118,20 +103,20 @@ export const ErrorList = withStyles(listStyles)(({ classes, ...props }) => (
   </List>
 ));
 
-const ErrorTitle = ({ record }) =>
-  record ? <FullNameField record={record} size={32} /> : null;
+// const ErrorTitle = ({ record }) =>
+//   record ? <FullNameField record={record} size={32} /> : null;
 
-const editStyles = {
-  first_name: { display: "inline-block" },
-  last_name: { display: "inline-block", marginLeft: 32 },
-  email: { width: 544 },
-  address: { maxWidth: 544 },
-  zipcode: { display: "inline-block" },
-  city: { display: "inline-block", marginLeft: 32 },
-  comment: {
-    maxWidth: "20em",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap"
-  }
-};
+// const editStyles = {
+//   first_name: { display: "inline-block" },
+//   last_name: { display: "inline-block", marginLeft: 32 },
+//   email: { width: 544 },
+//   address: { maxWidth: 544 },
+//   zipcode: { display: "inline-block" },
+//   city: { display: "inline-block", marginLeft: 32 },
+//   comment: {
+//     maxWidth: "20em",
+//     overflow: "hidden",
+//     textOverflow: "ellipsis",
+//     whiteSpace: "nowrap"
+//   }
+// };

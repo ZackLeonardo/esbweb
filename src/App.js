@@ -10,7 +10,7 @@ import themeReducer from "./themeReducer";
 import Login from "./Login";
 import Layout from "./Layout";
 import Menu from "./Menu";
-import { Dashboard } from "./dashboard";
+// import { Dashboard } from "./dashboard";
 import customRoutes from "./routes";
 import chineseMessages from "./i18n/zh";
 

@@ -1,47 +1,28 @@
 import React from "react";
 import {
-  Create,
   Show,
   TabbedShowLayout,
   Tab,
   Datagrid,
   DateField,
-  DateInput,
-  Edit,
-  EditButton,
   Filter,
   FormTab,
   List,
-  LongTextInput,
-  NullableBooleanInput,
   NumberField,
-  ReferenceManyField,
   Responsive,
   SearchInput,
-  TabbedForm,
   TextField,
-  TextInput,
-  Button,
-  Link,
   CardActions,
   RefreshButton,
-  SaveButton,
-  CreateButton,
-  Toolbar,
   RichTextField,
-  ArrayInput,
-  ArrayField,
-  SimpleFormIterator
+  ArrayField
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/BubbleChart"; //AddShoppingCart
-import RichTextInput from "ra-input-rich-text";
 
-import FullNameField from "./FullNameField";
 import SegmentsField from "./SegmentsField";
 import SegmentInput from "./SegmentInput";
 import ApidetailLinkField from "./ApidetailLinkField";
-import LinkedTo from "./LinkedTo";
 import MobileGrid from "./MobileGrid";
 
 export const StoreIcon = Icon;

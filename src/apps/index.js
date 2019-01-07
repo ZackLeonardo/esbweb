@@ -21,10 +21,10 @@ import {
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Apps";
-import { stringify } from "query-string";
-import get from "lodash/get";
+// import { stringify } from "query-string";
+// import get from "lodash/get";
 
-import FullNameField from "./FullNameField";
+// import FullNameField from "./FullNameField";
 import SegmentsField from "./SegmentsField";
 import SegmentsInput from "./SegmentsInput";
 import MobileGrid from "./MobileGrid";
@@ -147,8 +147,8 @@ export const AppList = withStyles(listStyles)(
   )
 );
 
-const AppTitle = ({ record }) =>
-  record ? <FullNameField record={record} size={32} /> : null;
+// const AppTitle = ({ record }) =>
+//   record ? <FullNameField record={record} size={32} /> : null;
 
 const editStyles = {
   first_name: { display: "inline-block" },

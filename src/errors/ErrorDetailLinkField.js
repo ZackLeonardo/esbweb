@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, TextField } from "react-admin";
+import { Link } from "react-admin";
 import get from "lodash/get";
 
 const ErrorDetailLinkField = props => {

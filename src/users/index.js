@@ -25,7 +25,7 @@ import {
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Person";
 
-import FullNameField from "./FullNameField";
+// import FullNameField from "./FullNameField";
 import SegmentsField from "./SegmentsField";
 import SegmentInput from "./SegmentInput";
 import SegmentsInput from "./SegmentsInput";
@@ -124,8 +124,8 @@ export const UserList = withStyles(listStyles)(({ classes, ...props }) => (
   </List>
 ));
 
-const UserTitle = ({ record }) =>
-  record ? <FullNameField record={record} size={32} /> : null;
+// const UserTitle = ({ record }) =>
+//   record ? <FullNameField record={record} size={32} /> : null;
 
 const editStyles = {
   first_name: { display: "inline-block" },

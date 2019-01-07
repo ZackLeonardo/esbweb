@@ -9,7 +9,6 @@ export default {
       create: "新建",
       export: "下载",
       edit: "编辑",
-      show: "查看",
       sort: "排序",
       cancel: "取消",
       undo: "撤销",

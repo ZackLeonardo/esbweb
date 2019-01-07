@@ -72,7 +72,7 @@ class Configuration extends React.Component {
   };
 
   render() {
-    const { classes, locale, changeLocale, translate } = this.props;
+    const { classes, translate } = this.props;
     return (
       <Card>
         <Title title={translate("pos.configuration")} />

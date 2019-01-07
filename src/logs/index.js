@@ -1,40 +1,23 @@
 import React from "react";
 import {
-  Create,
   Show,
   TabbedShowLayout,
   Tab,
   Datagrid,
   DateField,
-  DateInput,
-  Edit,
-  EditButton,
   Filter,
-  FormTab,
   List,
-  LongTextInput,
-  NullableBooleanInput,
   NumberField,
-  ReferenceManyField,
   Responsive,
   SearchInput,
-  TabbedForm,
   TextField,
-  TextInput,
-  Button,
-  Link,
   CardActions,
   RefreshButton,
-  SaveButton,
-  CreateButton,
-  Toolbar,
   RichTextField
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/TextFields";
 
-import FullNameField from "./FullNameField";
-import SegmentInput from "./SegmentInput";
 import LogdetailLinkField from "./LogdetailLinkField";
 import MobileGrid from "./MobileGrid";
 
@@ -128,8 +111,8 @@ export const LogList = withStyles(listStyles)(({ classes, ...props }) => (
   </List>
 ));
 
-const LogTitle = ({ record }) =>
-  record ? <FullNameField record={record} size={32} /> : null;
+// const LogTitle = ({ record }) =>
+//   record ? <FullNameField record={record} size={32} /> : null;
 
 const editStyles = {
   first_name: { display: "inline-block" },

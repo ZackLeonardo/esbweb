@@ -20,7 +20,7 @@
 /* global define */
 
 (function($) {
-  "use strict";
+  // "use strict";
 
   /*
   * Add integers, wrapping at 2^32. This uses 16-bit operations internally

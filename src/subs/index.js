@@ -1,26 +1,18 @@
 import React from "react";
 import {
   Create,
-  Show,
-  TabbedShowLayout,
-  Tab,
   Datagrid,
   DateField,
-  DateInput,
   Edit,
   EditButton,
   Filter,
   FormTab,
   List,
-  LongTextInput,
-  NullableBooleanInput,
   NumberField,
-  ReferenceManyField,
   Responsive,
   SearchInput,
   TabbedForm,
   TextField,
-  TextInput,
   Button,
   Link,
   CardActions,
@@ -35,7 +27,6 @@ import {
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Flag";
 
-import FullNameField from "./FullNameField";
 import SegmentInput from "./SegmentInput";
 import LinkedTo from "./LinkedTo";
 import MobileGrid from "./MobileGrid";
@@ -136,24 +127,6 @@ export const SubList = withStyles(listStyles)(({ classes, ...props }) => (
     />
   </List>
 ));
-
-const SubTitle = ({ record }) =>
-  record ? <FullNameField record={record} size={32} /> : null;
-
-const editStyles = {
-  first_name: { display: "inline-block" },
-  last_name: { display: "inline-block", marginLeft: 32 },
-  email: { width: 544 },
-  address: { maxWidth: 544 },
-  zipcode: { display: "inline-block" },
-  city: { display: "inline-block", marginLeft: 32 },
-  comment: {
-    maxWidth: "20em",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap"
-  }
-};
 
 const SubEditToolbar = props => (
   <Toolbar {...props}>
