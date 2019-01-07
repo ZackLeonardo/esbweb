@@ -5,13 +5,14 @@ import {
   AUTH_ERROR,
   AUTH_GET_PERMISSIONS
 } from "react-admin";
+import md5 from "./md5";
 
 export default (type, params) => {
   if (type === AUTH_LOGIN) {
-    const { username, password } = params;
+    let { username, password } = params;
     const request = new Request("http://esb.dpm.org.cn:8080/esb/login", {
       method: "POST",
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username: username, password: md5(password) }),
       headers: new Headers({ "Content-Type": "application/json" })
     });
     return fetch(request)
