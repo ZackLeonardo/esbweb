@@ -22,7 +22,7 @@ const styles = theme => ({
     minHeight: "100vh",
     alignItems: "center",
     justifyContent: "flex-start",
-    background: "url(https://source.unsplash.com/random/1600x900)",
+    backgroundImage: "url('home.jpeg')",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"
   },
