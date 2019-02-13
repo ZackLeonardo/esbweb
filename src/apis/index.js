@@ -121,6 +121,7 @@ export const ApiList = withStyles(listStyles)(({ classes, ...props }) => (
           <SegmentsField label="所属应用系统" source="appname" />
           <TextField label="接口版本" source="edition" />
           <SegmentsField label="接口协议" source="transfer" />
+          <SegmentsField label="调用方式" source="requestmode" />
           <SegmentsField label="接口状态" source="cyclestatus" />
           <DateField
             label="最新修改时间"
@@ -177,6 +178,7 @@ export const ApiEdit = withStyles(editStyles)(({ classes, ...props }) => (
         <TextInput label="接口版本" source="edition" />
         <SegmentInput label="所属应用系统" source="appid" />
         <SegmentInput label="接口协议" source="transfer" />
+        <SegmentInput label="调用方式" source="requestmode" />
         <SegmentInput label="接口状态" source="cyclestatusid" />
         <TextInput label="备注" source="remarks" />
       </FormTab>

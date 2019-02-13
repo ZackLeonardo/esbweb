@@ -25,6 +25,14 @@ class SegmentInput extends Component {
     } else if (source === "cyclestatusid") {
       const segments = [{ id: "1", name: "启用" }, { id: "0", name: "停用" }];
       this.setState({ segments: segments });
+    } else if (source === "requestmode") {
+      const segments = [
+        { id: "get", name: "get" },
+        { id: "post", name: "post" },
+        { id: "put", name: "put" },
+        { id: "delete", name: "delte" }
+      ];
+      this.setState({ segments: segments });
     } else {
       dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
         //process.env.REACT_APP_DATA_PROVIDER

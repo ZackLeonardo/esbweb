@@ -106,6 +106,7 @@ export const StoreList = withStyles(listStyles)(({ classes, ...props }) => (
           <SegmentsField label="所属应用系统" source="appname" />
           <TextField label="接口版本" source="edition" />
           <SegmentsField label="接口协议" source="transfer" />
+          <SegmentsField label="调用方式" source="requestmode" />
           <SegmentsField label="接口状态" source="cyclestatus" />
           <DateField
             label="最新修改时间"
@@ -146,6 +147,7 @@ export const StoreShow = withStyles(editStyles)(({ classes, ...props }) => (
         <TextField label="接口版本" source="edition" />
         <SegmentsField label="所属应用系统" source="appname" />
         <SegmentsField label="接口协议" source="transfer" />
+        <SegmentsField label="调用方式" source="requestmode" />
         <SegmentsField label="接口状态" source="cyclestatus" />
         <DateField
           label="最新修改时间"
