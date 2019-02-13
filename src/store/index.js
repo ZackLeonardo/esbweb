@@ -173,6 +173,7 @@ export const StoreShow = withStyles(editStyles)(({ classes, ...props }) => (
       </FormTab>
       <FormTab label="输出数据说明">
         <RichTextField label="参数名称" source="outputexample" />
+        <TextField label="接口响应超时时间（ms）" source="apitimeout" />
       </FormTab>
     </TabbedShowLayout>
   </Show>

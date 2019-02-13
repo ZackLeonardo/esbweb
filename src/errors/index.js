@@ -95,7 +95,7 @@ export const ErrorList = withStyles(listStyles)(({ classes, ...props }) => (
           <TextField label="ID" source="id" />
           <TextField label="接口名称" source="apiname" />
           <SegmentsField label="异常情况" source="error" />
-          <DateField label="异常时间" source="time" type="date" showTime />
+          <TextField label="异常时间" source="time" />
           <ErrorDetailLinkField label="查看日志信息" source="logid" />
         </Datagrid>
       }

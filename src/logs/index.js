@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Text } from "react";
 import {
   Show,
   TabbedShowLayout,
@@ -13,7 +13,8 @@ import {
   TextField,
   CardActions,
   RefreshButton,
-  RichTextField
+  RichTextField,
+  Card
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/TextFields";
@@ -83,33 +84,60 @@ const LogActions = ({
   </CardActions>
 );
 
-export const LogList = withStyles(listStyles)(({ classes, ...props }) => (
-  <List
-    {...props}
-    filters={<LogFilter />}
-    sort={{ field: "id", order: "DESC" }}
-    perPage={25}
-    actions={<LogActions />}
-  >
-    <Responsive
-      xsmall={<MobileGrid />}
-      medium={
-        <Datagrid>
-          <TextField label="ID" source="id" />
-          <TextField label="接口" source="apiname" />
-          <TextField label="发起调用的APP" source="appname" />
-          <TextField label="成功/失败" source="result" />
-          <DateField label="开始调用时间" source="start" type="date" showTime />
-          <DateField label="结束调用时间" source="end" type="date" showTime />
-          <TextField label="耗时" source="spend" />
-          <TextField label="输入参数" source="args" />
-          <RichTextField label="返回结果" source="response" />
-          <LogdetailLinkField />
-        </Datagrid>
-      }
-    />
+const PostPanel = ({ id, record, resource }) => {
+  console.log("PostPanel");
+
+  return <Text>test</Text>;
+};
+
+export const LogList = props => (
+  <List {...props}>
+    <Datagrid expand={<PostPanel />}>
+      <TextField label="ID" source="id" />
+      <TextField label="接口" source="apiname" />
+      <TextField label="发起调用的APP" source="appname" />
+      <TextField label="成功/失败" source="result" />
+      {/* <DateField label="开始调用时间" source="start" type="date" showTime /> */}
+      <TextField label="开始调用时间" source="start" />
+      {/* <DateField label="结束调用时间" source="end" type="date" showTime /> */}
+      <TextField label="结束调用时间" source="end" />
+      <TextField label="耗时(ms)" source="spend" />
+      <TextField label="输入参数" source="args" />
+      <TextField label="错误信息" source="details" />
+      <RichTextField label="返回结果" source="response" />
+      <LogdetailLinkField />
+    </Datagrid>
   </List>
-));
+);
+
+// export const LogList = withStyles(listStyles)(({ classes, ...props }) => {
+//   return (
+//     <List
+//       {...props}
+//       filters={<LogFilter />}
+//       sort={{ field: "id", order: "DESC" }}
+//       perPage={25}
+//       actions={<LogActions />}
+//       bulkActionButtons={false}
+//     >
+//       <Datagrid expand={<PostPanel />}>
+//         <TextField label="ID" source="id" />
+//         <TextField label="接口" source="apiname" />
+//         <TextField label="发起调用的APP" source="appname" />
+//         <TextField label="成功/失败" source="result" />
+//         {/* <DateField label="开始调用时间" source="start" type="date" showTime /> */}
+//         <TextField label="开始调用时间" source="start" />
+//         {/* <DateField label="结束调用时间" source="end" type="date" showTime /> */}
+//         <TextField label="结束调用时间" source="end" />
+//         <TextField label="耗时(ms)" source="spend" />
+//         <TextField label="输入参数" source="args" />
+//         <TextField label="错误信息" source="details" />
+//         <RichTextField label="返回结果" source="response" />
+//         <LogdetailLinkField />
+//       </Datagrid>
+//     </List>
+//   );
+// });
 
 // const LogTitle = ({ record }) =>
 //   record ? <FullNameField record={record} size={32} /> : null;
@@ -129,11 +157,76 @@ const editStyles = {
   }
 };
 
+const DetailsShow = props => (
+  <Show
+    {...props}
+    /* disable the app title change when shown */
+    title=" "
+  >
+    <List
+      {...props}
+      sort={{ field: "id", order: "DESC" }}
+      perPage={25}
+      actions={null}
+      bulkActionButtons={null}
+      aside={null}
+      // rowsPerPageOptions={null}
+      pagination={null}
+    >
+      <Responsive
+        xsmall={<MobileGrid />}
+        medium={
+          <Datagrid>
+            <TextField label="ID" source="id" />
+            <TextField label="事件" source="event" />
+            <TextField label="结束时间" source="time" />
+            <TextField label="成功/失败" source="result" />
+          </Datagrid>
+        }
+      />
+    </List>
+  </Show>
+);
+
+const CommentGrid = ({ ids, data, basePath }) => (
+  <div style={{ margin: "1em" }}>
+    {ids.map(id => (
+      <Datagrid>
+        <TextField record={data[id]} label="ID" source="id" />
+        <TextField record={data[id]} label="事件" source="event" />
+        <TextField record={data[id]} label="结束时间" source="time" />
+        <TextField record={data[id]} label="成功/失败" source="result" />
+      </Datagrid>
+    ))}
+  </div>
+);
+
 export const LogShow = withStyles(editStyles)(({ classes, ...props }) => (
   <Show {...props}>
     <TabbedShowLayout>
       <Tab label="详细日志信息">
-        <RichTextField label="日志如下：" source="response" />
+        <List
+          {...props}
+          sort={{ field: "id", order: "DESC" }}
+          perPage={25}
+          actions={null}
+          bulkActionButtons={null}
+          aside={null}
+          rowsPerPageOptions={[]}
+          pagination={null}
+        >
+          <Responsive
+            xsmall={<MobileGrid />}
+            medium={
+              <Datagrid>
+                <TextField label="ID" source="id" />
+                <TextField label="事件" source="event" />
+                <TextField label="结束时间" source="time" />
+                <TextField label="成功/失败" source="result" />
+              </Datagrid>
+            }
+          />
+        </List>
       </Tab>
     </TabbedShowLayout>
   </Show>

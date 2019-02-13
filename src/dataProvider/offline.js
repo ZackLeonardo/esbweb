@@ -213,7 +213,22 @@ const dataProvider = fakeDataProvider({
       spend: "10ms",
       args: "无",
       response: "{data: {...}}",
-      details: ""
+      details: "",
+      MD5: "111",
+      logdetails: [
+        {
+          id: "0",
+          event: "0",
+          result: "成功",
+          time: "2018/10/10 09:00:00:00"
+        },
+        {
+          id: "1",
+          event: "0",
+          result: "成功",
+          time: "2018/10/10 09:00:00:00"
+        }
+      ]
     },
     {
       id: "1",
@@ -226,7 +241,8 @@ const dataProvider = fakeDataProvider({
       spend: "10ms",
       args: "无",
       response: "{data: {...}}",
-      details: ""
+      details: "",
+      MD5: "222"
     }
   ],
   errors: [

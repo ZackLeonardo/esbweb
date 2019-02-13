@@ -201,6 +201,7 @@ export const ApiEdit = withStyles(editStyles)(({ classes, ...props }) => (
           label="输出数据说明"
           source="outputexample"
         />
+        <TextInput label="接口响应超时时间（ms）" source="apitimeout" />
       </FormTab>
     </TabbedForm>
   </Edit>
@@ -237,6 +238,7 @@ export const ApiCreate = withStyles(editStyles)(({ classes, ...props }) => (
           label="输出数据说明"
           source="outputexample"
         />
+        <TextInput label="接口响应超时时间（ms）" source="apitimeout" />
       </FormTab>
     </TabbedForm>
   </Create>
@@ -277,6 +279,7 @@ export const ApiShow = withStyles(editStyles)(({ classes, ...props }) => (
       </FormTab>
       <FormTab label="输出数据说明">
         <RichTextField label="参数名称" source="outputexample" />
+        <TextField label="接口响应超时时间（ms）" source="apitimeout" />
       </FormTab>
     </TabbedShowLayout>
   </Show>
