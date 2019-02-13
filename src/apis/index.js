@@ -189,6 +189,7 @@ export const ApiEdit = withStyles(editStyles)(({ classes, ...props }) => (
         <ArrayInput label="参数表" source="args">
           <SimpleFormIterator>
             <TextInput label="参数名称" source="parametername" />
+            <SegmentInput label="是否必填" source="required" />
             <TextInput label="参数描述" source="description" />
             <TextInput label="示例" source="example" />
           </SimpleFormIterator>
@@ -213,6 +214,7 @@ export const ApiCreate = withStyles(editStyles)(({ classes, ...props }) => (
         <TextInput label="接口版本" source="edition" />
         <SegmentInput label="所属应用系统" source="appid" />
         <SegmentInput label="接口协议" source="transfer" />
+        <SegmentInput label="调用方式" source="requestmode" />
         <SegmentInput label="接口状态" source="cyclestatusid" />
         <TextInput label="备注" source="remarks" />
       </FormTab>
@@ -223,6 +225,7 @@ export const ApiCreate = withStyles(editStyles)(({ classes, ...props }) => (
         <ArrayInput label="参数表" source="args">
           <SimpleFormIterator>
             <TextInput label="参数名称" source="parametername" />
+            <SegmentInput label="是否必填" source="required" />
             <TextInput label="参数描述" source="description" />
             <TextInput label="示例" source="example" />
           </SimpleFormIterator>
@@ -248,6 +251,7 @@ export const ApiShow = withStyles(editStyles)(({ classes, ...props }) => (
         <TextField label="接口版本" source="edition" />
         <SegmentsField label="所属应用系统" source="appname" />
         <SegmentsField label="接口协议" source="transfer" />
+        <SegmentsField label="调用方式" source="requestmode" />
         <SegmentsField label="接口状态" source="cyclestatus" />
         <DateField
           label="最新修改时间"
@@ -265,6 +269,7 @@ export const ApiShow = withStyles(editStyles)(({ classes, ...props }) => (
         <ArrayField label="参数表" source="args">
           <Datagrid>
             <TextField label="参数名称" source="parametername" />
+            <SegmentsField label="是否必填" source="required" />
             <TextField label="参数描述" source="description" />
             <TextField label="示例" source="example" />
           </Datagrid>

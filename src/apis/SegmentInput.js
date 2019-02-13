@@ -33,6 +33,9 @@ class SegmentInput extends Component {
         { id: "delete", name: "delte" }
       ];
       this.setState({ segments: segments });
+    } else if (source.indexOf("required") >= 0) {
+      const segments = [{ id: "1", name: "是" }, { id: "0", name: "否" }];
+      this.setState({ segments: segments });
     } else {
       dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
         //process.env.REACT_APP_DATA_PROVIDER

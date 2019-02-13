@@ -165,6 +165,7 @@ export const StoreShow = withStyles(editStyles)(({ classes, ...props }) => (
         <ArrayField label="参数表" source="args">
           <Datagrid>
             <TextField label="参数名称" source="parametername" />
+            <SegmentsField label="是否必填" source="required" />
             <TextField label="参数描述" source="description" />
             <TextField label="示例" source="example" />
           </Datagrid>

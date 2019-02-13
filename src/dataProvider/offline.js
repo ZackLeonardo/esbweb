@@ -57,12 +57,14 @@ const dataProvider = fakeDataProvider({
         {
           id: 1,
           parametername: "test",
+          required: "1",
           description: "test",
           example: "test"
         },
         {
           id: 1,
           parametername: "test1",
+          required: "1",
           description: "test1",
           example: "test1"
         }
@@ -89,12 +91,14 @@ const dataProvider = fakeDataProvider({
         {
           id: 1,
           parametername: "test",
+          required: "1",
           description: "test",
           example: "test"
         },
         {
           id: 1,
           parametername: "test1",
+          required: "1",
           description: "test1",
           example: "test1"
         }
@@ -123,12 +127,14 @@ const dataProvider = fakeDataProvider({
         {
           id: 1,
           parametername: "test",
+          required: "1",
           description: "test",
           example: "test"
         },
         {
           id: 1,
           parametername: "test1",
+          required: "1",
           description: "test1",
           example: "test1"
         }
@@ -155,12 +161,14 @@ const dataProvider = fakeDataProvider({
         {
           id: 1,
           parametername: "test",
+          required: "1",
           description: "test",
           example: "test"
         },
         {
           id: 1,
           parametername: "test1",
+          required: "1",
           description: "test1",
           example: "test1"
         }
