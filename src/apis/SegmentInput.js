@@ -30,11 +30,11 @@ class SegmentInput extends Component {
         { id: "get", name: "get" },
         { id: "post", name: "post" },
         { id: "put", name: "put" },
-        { id: "delete", name: "delte" }
+        { id: "delete", name: "delete" }
       ];
       this.setState({ segments: segments });
     } else if (source.indexOf("required") >= 0) {
-      const segments = [{ id: "1", name: "是" }, { id: "0", name: "否" }];
+      const segments = [{ id: "是", name: "是" }, { id: "否", name: "否" }];
       this.setState({ segments: segments });
     } else {
       dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
