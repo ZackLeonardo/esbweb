@@ -7,6 +7,7 @@ import { translate, changeLocale, Title } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import compose from "recompose/compose";
 import { changeTheme } from "./actions";
+import md5 from "../md5";
 
 const styles = {
   label: { width: "10em", display: "inline-block" },
@@ -28,8 +29,8 @@ class Configuration extends React.Component {
         error: "两次密码不一致"
       });
     } else {
-      let password = this.state.oldPasswd;
-      let newpassword = this.state.newPasswd1;
+      let password = md5(this.state.oldPasswd);
+      let newpassword = md5(this.state.newPasswd1);
       const request = new Request(
         "http://esb.dpm.org.cn:8080/esb/updatepassword",
         {

@@ -95,14 +95,7 @@ const UserActions = ({
   </CardActions>
 );
 
-const hasRole = arg => {
-  let roles = localStorage.getItem("role");
-  return roles.indexOf(arg) > -1;
-};
-
 export const UserList = withStyles(listStyles)(({ classes, ...props }) => {
-  const roles = localStorage.getItem("role");
-  const hasRole = roles.indexOf("sysAdmin") > -1;
   return (
     <List
       {...props}

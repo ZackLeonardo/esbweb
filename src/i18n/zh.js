@@ -82,9 +82,9 @@ export default {
       logout: "退出"
     },
     notification: {
-      updated: "条目已更新 |||| %{smart_count} 项条目已更新",
-      created: "条目已新建",
-      deleted: "条目已删除 |||| %{smart_count} 项条目已删除",
+      updated: "条目正在完成更新 |||| %{smart_count} 项条目已更新",
+      created: "条目正在完成新建",
+      deleted: "条目正在完成删除 |||| %{smart_count} 项条目已删除",
       bad_item: "不正确的条目",
       item_doesnt_exist: "条目不存在",
       http_error: "与服务通信出错",
