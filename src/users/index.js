@@ -95,34 +95,43 @@ const UserActions = ({
   </CardActions>
 );
 
-export const UserList = withStyles(listStyles)(({ classes, ...props }) => (
-  <List
-    {...props}
-    filters={<UserFilter />}
-    sort={{ field: "userid", order: "DESC" }}
-    perPage={25}
-    actions={<UserActions />}
-  >
-    <Responsive
-      xsmall={<MobileGrid />}
-      medium={
-        <Datagrid>
-          <TextField label="用户名" source="username" />
-          <TextField label="用户信息" source="userinfo" />
-          <DateField
-            label="创建日期"
-            source="createdate"
-            type="date"
-            showTime
-          />
-          <SegmentsField label="拥有角色" />
-          <TextField label="备注" source="remarks" />
-          <EditButton />
-        </Datagrid>
-      }
-    />
-  </List>
-));
+const hasRole = arg => {
+  let roles = localStorage.getItem("role");
+  return roles.indexOf(arg) > -1;
+};
+
+export const UserList = withStyles(listStyles)(({ classes, ...props }) => {
+  const roles = localStorage.getItem("role");
+  const hasRole = roles.indexOf("sysAdmin") > -1;
+  return (
+    <List
+      {...props}
+      filters={<UserFilter />}
+      sort={{ field: "userid", order: "DESC" }}
+      perPage={25}
+      actions={<UserActions />}
+    >
+      <Responsive
+        xsmall={<MobileGrid />}
+        medium={
+          <Datagrid>
+            <TextField label="用户名" source="username" />
+            <TextField label="用户信息" source="userinfo" />
+            <DateField
+              label="创建日期"
+              source="createdate"
+              type="date"
+              showTime
+            />
+            <SegmentsField label="拥有角色" />
+            <TextField label="备注" source="remarks" />
+            <EditButton />
+          </Datagrid>
+        }
+      />
+    </List>
+  );
+});
 
 // const UserTitle = ({ record }) =>
 //   record ? <FullNameField record={record} size={32} /> : null;

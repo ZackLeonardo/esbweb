@@ -17,7 +17,8 @@ import {
   CardActions,
   RefreshButton,
   SaveButton,
-  Toolbar
+  Toolbar,
+  BulkDeleteButton
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Apps";
@@ -128,6 +129,7 @@ export const AppList = withStyles(listStyles)(
       sort={{ field: "id", order: "DESC" }}
       perPage={25}
       actions={<AppActions />}
+      bulkActionButtons={hasRole("sysAdmin") ? <BulkDeleteButton /> : false}
     >
       <Responsive
         xsmall={<MobileGrid />}

@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Datagrid,
-  DateField,
   Filter,
   List,
   NumberField,
@@ -9,16 +8,21 @@ import {
   SearchInput,
   TextField,
   CardActions,
-  RefreshButton
+  RefreshButton,
+  BulkDeleteButton
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Error";
 
 import MobileGrid from "./MobileGrid";
-import SegmentsField from "./SegmentsField";
 import ErrorDetailLinkField from "./ErrorDetailLinkField";
 
 export const ErrorIcon = Icon;
+
+const hasRole = arg => {
+  let roles = localStorage.getItem("role");
+  return roles.indexOf(arg) > -1;
+};
 
 const ErrorFilter = props => (
   <Filter {...props}>
@@ -87,6 +91,7 @@ export const ErrorList = withStyles(listStyles)(({ classes, ...props }) => (
     sort={{ field: "id", order: "DESC" }}
     perPage={25}
     actions={<ErrorActions />}
+    bulkActionButtons={hasRole("sysAdmin") ? <BulkDeleteButton /> : false}
   >
     <Responsive
       xsmall={<MobileGrid />}
@@ -94,7 +99,7 @@ export const ErrorList = withStyles(listStyles)(({ classes, ...props }) => (
         <Datagrid>
           <TextField label="ID" source="id" />
           <TextField label="接口名称" source="apiname" />
-          <SegmentsField label="异常情况" source="error" />
+          <TextField label="异常情况" source="error" />
           <TextField label="异常时间" source="time" />
           <ErrorDetailLinkField label="查看日志信息" source="logid" />
         </Datagrid>

@@ -15,7 +15,8 @@ import {
   CardActions,
   RefreshButton,
   RichTextField,
-  ArrayField
+  ArrayField,
+  BulkDeleteButton
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/BubbleChart"; //AddShoppingCart
@@ -26,6 +27,11 @@ import ApidetailLinkField from "./ApidetailLinkField";
 import MobileGrid from "./MobileGrid";
 
 export const StoreIcon = Icon;
+
+const hasRole = arg => {
+  let roles = localStorage.getItem("role");
+  return roles.indexOf(arg) > -1;
+};
 
 const ApiFilter = props => (
   <Filter {...props}>
@@ -95,7 +101,9 @@ export const StoreList = withStyles(listStyles)(({ classes, ...props }) => (
     sort={{ field: "id", order: "DESC" }}
     perPage={25}
     actions={<ApiActions />}
-    bulkActionButtons={false}
+    bulkActionButtons={
+      hasRole("sysAdmin") || hasRole("apiAdmin") ? <BulkDeleteButton /> : false
+    }
   >
     <Responsive
       xsmall={<MobileGrid />}
