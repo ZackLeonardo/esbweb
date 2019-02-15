@@ -110,7 +110,7 @@ export const LogList = props => (
     sort={{ field: "id", order: "DESC" }}
     perPage={25}
     actions={<LogActions />}
-    bulkActionButtons={hasRole("sysAdmin") ? <BulkDeleteButton /> : false}
+    bulkActionButtons={false}
   >
     <Datagrid>
       <TextField label="ID" source="id" />
