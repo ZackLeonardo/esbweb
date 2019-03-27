@@ -11,8 +11,7 @@ import {
   TextField,
   CardActions,
   RefreshButton,
-  RichTextField,
-  BulkDeleteButton
+  RichTextField
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/TextFields";
@@ -124,7 +123,11 @@ export const LogList = props => (
       <MySpendTextField label="耗时(ms)" {...props} />
       <TextField label="输入参数" source="args" />
       <TextField label="错误信息" source="details" />
-      <RichTextField label="返回结果" source="response" />
+      <RichTextField
+        label="返回结果"
+        source="response"
+        style={{ maxHeight: 230, maxWidth: 500, overflow: "scroll" }}
+      />
       <LogdetailLinkField />
     </Datagrid>
   </List>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { translate, SelectInput } from "react-admin";
+import { translate, SelectInput, TextInput } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import compose from "recompose/compose";
 import dataProviderFactory from "../dataProvider";
@@ -10,7 +10,8 @@ const styles = {
 
 class SegmentInput extends Component {
   state = {
-    segments: []
+    segments: [],
+    showNamespace: false
   };
 
   componentWillMount = () => {
@@ -59,17 +60,30 @@ class SegmentInput extends Component {
 
   render() {
     const { classes, translate, ...rest } = this.props;
-    const { segments } = this.state;
+    const { segments, showNamespace } = this.state;
     return (
-      <SelectInput
-        label={"所属应用系统"}
-        {...rest}
-        choices={segments.map(segment => ({
-          id: segment.id,
-          name: segment.name
-        }))}
-        className={classes.input}
-      />
+      <div>
+        <SelectInput
+          label={"所属应用系统"}
+          {...rest}
+          choices={segments.map(segment => ({
+            id: segment.id,
+            name: segment.name
+          }))}
+          className={classes.input}
+          onChange={(event, key, payload) => {
+            if (key === "webservice") {
+              this.setState({ showNamespace: true });
+            } else {
+              this.setState({ showNamespace: false });
+            }
+            console.log("chose:" + key);
+          }}
+        />
+        {showNamespace ? (
+          <TextInput label="命名空间" source="namespace" />
+        ) : null}
+      </div>
     );
   }
 }
