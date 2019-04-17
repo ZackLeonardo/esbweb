@@ -12,6 +12,18 @@ const styles = {
   chip: { margin: 4 }
 };
 
+const getContentType = value => {
+  if (value === 0) {
+    return "application/json";
+  }
+  if (value === 1) {
+    return "中科软框架";
+  }
+  if (value === 2) {
+    return "application/x-www-form-urlencoded";
+  }
+};
+
 const SegmentsField = ({ record, source }) => (
   <span style={styles.main}>
     {record[source] && (
@@ -19,6 +31,12 @@ const SegmentsField = ({ record, source }) => (
     )}
     {source === "transfer" && record["namespace"] ? (
       <div style={{ marginLeft: 10 }}>{"命名空间：" + record["namespace"]}</div>
+    ) : // <TextField label="接口版本" value={record["namespace"]} />
+    null}
+    {source === "requestmode" && record["needParaWithData"] ? (
+      <div style={{ marginLeft: 10 }}>
+        {"Post Content-Type：" + getContentType(record["needParaWithData"])}
+      </div>
     ) : // <TextField label="接口版本" value={record["namespace"]} />
     null}
   </span>

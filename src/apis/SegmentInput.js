@@ -11,11 +11,27 @@ const styles = {
 class SegmentInput extends Component {
   state = {
     segments: [],
-    showNamespace: false
+    showNamespace: false,
+    showPostContentType: false
   };
 
   componentWillMount = () => {
-    const { source } = this.props;
+    const { record, source } = this.props;
+    if (
+      source === "transfer" &&
+      record["transfer"] === "webservice" &&
+      record["namespace"]
+    ) {
+      this.setState({ showNamespace: true });
+    }
+    if (
+      source === "requestmode" &&
+      record["requestmode"] === "post" &&
+      record["needParaWithData"] > -1
+    ) {
+      this.setState({ showPostContentType: true });
+    }
+
     if (source === "transfer") {
       const segments = [
         { id: "http", name: "Http" },
@@ -60,7 +76,7 @@ class SegmentInput extends Component {
 
   render() {
     const { classes, translate, ...rest } = this.props;
-    const { segments, showNamespace } = this.state;
+    const { segments, showNamespace, showPostContentType } = this.state;
     return (
       <div>
         <SelectInput
@@ -77,11 +93,32 @@ class SegmentInput extends Component {
             } else {
               this.setState({ showNamespace: false });
             }
+
+            if (key === "post") {
+              this.setState({ showPostContentType: true });
+            } else {
+              this.setState({ showPostContentType: false });
+            }
             console.log("chose:" + key);
           }}
         />
         {showNamespace ? (
           <TextInput label="命名空间" source="namespace" />
+        ) : null}
+        {showPostContentType ? (
+          <SelectInput
+            choices={[
+              { id: 0, name: "application/json" },
+              { id: 2, name: "application/x-www-form-urlencoded" },
+              { id: 1, name: "中科软框架" }
+            ].map(segment => ({
+              id: segment.id,
+              name: segment.name
+            }))}
+            className={classes.input}
+            label="Post Content-Type"
+            source="needParaWithData"
+          />
         ) : null}
       </div>
     );
