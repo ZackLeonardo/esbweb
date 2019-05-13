@@ -121,7 +121,11 @@ export const LogList = props => (
       {/* <DateField label="结束调用时间" source="end" type="date" showTime /> */}
       <TextField label="结束调用时间" source="end" />
       <MySpendTextField label="耗时(ms)" {...props} />
-      <TextField label="输入参数" source="args" />
+      <RichTextField
+        label="输入参数"
+        source="args"
+        style={{ maxHeight: 230, maxWidth: 500, overflow: "scroll" }}
+      />
       <TextField label="错误信息" source="details" />
       <RichTextField
         label="返回结果"
