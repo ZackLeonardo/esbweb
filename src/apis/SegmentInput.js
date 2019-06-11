@@ -110,7 +110,8 @@ class SegmentInput extends Component {
             choices={[
               { id: 0, name: "application/json" },
               { id: 2, name: "application/x-www-form-urlencoded" },
-              { id: 1, name: "中科软框架" }
+              { id: 1, name: "中科软框架" },
+              { id: 3, name: "parameters in URL(非协议标准方式)" }
             ].map(segment => ({
               id: segment.id,
               name: segment.name

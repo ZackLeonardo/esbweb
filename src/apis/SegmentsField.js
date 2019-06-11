@@ -14,13 +14,16 @@ const styles = {
 
 const getContentType = value => {
   if (value === 0) {
-    return "application/json";
+    return "Post Content-Type：application/json";
   }
   if (value === 1) {
     return "中科软框架";
   }
   if (value === 2) {
-    return "application/x-www-form-urlencoded";
+    return "Post Content-Type：application/x-www-form-urlencoded";
+  }
+  if (value === 3) {
+    return "parameters in URL(非协议标准方式)";
   }
 };
 
@@ -35,7 +38,7 @@ const SegmentsField = ({ record, source }) => (
     null}
     {source === "requestmode" && record["needParaWithData"] ? (
       <div style={{ marginLeft: 10 }}>
-        {"Post Content-Type：" + getContentType(record["needParaWithData"])}
+        {getContentType(record["needParaWithData"])}
       </div>
     ) : // <TextField label="接口版本" value={record["namespace"]} />
     null}
