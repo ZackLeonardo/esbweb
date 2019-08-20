@@ -7702,6 +7702,11 @@ papaparse@^4.1.4:
   resolved "https://registry.npmjs.org/papaparse/-/papaparse-4.6.1.tgz#7b3c5bdf4f0fd12374e2d37f987e9d74a1834ca8"
   integrity sha512-X9Ws5tnEQKRCZRfoojX3KvRZbLY1BbL0wqSHF3CKGmxD8Zr4E0WaipUuFweffkCN8RSQzHKhb/F+ATYdNcz1rg==
 
+papaparse@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.npmjs.org/papaparse/-/papaparse-5.0.2.tgz#447ef95a42015e0b0e52df717b44aedc78252dc9"
+  integrity sha512-FoaaFfNlCztJ7c+XD1Fgb0zIJ530HwSr6FBfM1mcMzLtIWoTxE5paBNJWiCWFjDrTzGiEG/uIUfqVzgKxqd+Sw==
+
 param-case@2.1.x:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/param-case/-/param-case-2.1.1.tgz#df94fd8cf6531ecf75e6bef9a0858fbc72be2247"

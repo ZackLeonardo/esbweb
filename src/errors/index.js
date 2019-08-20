@@ -9,10 +9,13 @@ import {
   TextField,
   CardActions,
   RefreshButton,
-  BulkDeleteButton
+  BulkDeleteButton,
+  downloadCSV,
+  ExportButton
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Error";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
 
 import MobileGrid from "./MobileGrid";
 import ErrorDetailLinkField from "./ErrorDetailLinkField";
@@ -23,6 +26,25 @@ export const ErrorIcon = Icon;
 const hasRole = arg => {
   let roles = localStorage.getItem("role");
   return roles.indexOf(arg) > -1;
+};
+
+// const exporter = (records, fetchRelatedRecords) => {
+//   fetchRelatedRecords(records, "ids", "logs").then(logs => {
+//     const data = records.map(record => ({
+//       ...record,
+//       details_logs: JSON.stringify(logs[record.id])
+//     }));
+//     const csv = convertToCSV({
+//       data,
+//       fields: ["id", "apiname", "appname", "end", "details", "response"]
+//     });
+//     downloadCSV(csv, "errors");
+//   });
+// };
+const exporter = (records, fetchRelatedRecords) => {
+  const data = records;
+  const fields = ["id", "apiname", "appname", "error", "time"];
+  downloadCSV(convertToCSV({ data, fields }), "errors");
 };
 
 const ErrorFilter = props => (
@@ -55,6 +77,7 @@ const listStyles = {
 
 const ErrorActions = ({
   bulkActions,
+  currentSort,
   basePath,
   displayedFilters,
   filters,
@@ -82,10 +105,16 @@ const ErrorActions = ({
         context: "button"
       })}
     <RefreshButton label="刷新" />
+    <ExportButton
+      resource={resource}
+      sort={currentSort}
+      filter={filterValues}
+      exporter={exporter}
+    />
   </CardActions>
 );
 
-export const ErrorList = withStyles(listStyles)(({ classes, ...props }) => (
+export const ErrorList = props => (
   <List
     {...props}
     filters={<ErrorFilter />}
@@ -101,6 +130,7 @@ export const ErrorList = withStyles(listStyles)(({ classes, ...props }) => (
           <TextField label="ID" source="id" />
           <TextField label="接口名称" source="apiname" />
           <LinkedTo label="接口信息" source="apiname" />
+          <TextField label="发起调用应用系统" source="appname" />
           <TextField label="异常情况" source="error" />
           <TextField label="异常时间" source="time" />
           <ErrorDetailLinkField label="查看日志信息" source="logid" />
@@ -108,7 +138,7 @@ export const ErrorList = withStyles(listStyles)(({ classes, ...props }) => (
       }
     />
   </List>
-));
+);
 
 // const ErrorTitle = ({ record }) =>
 //   record ? <FullNameField record={record} size={32} /> : null;

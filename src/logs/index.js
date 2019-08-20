@@ -11,7 +11,10 @@ import {
   TextField,
   CardActions,
   RefreshButton,
-  RichTextField
+  RichTextField,
+  BulkDeleteButton,
+  downloadCSV,
+  ExportButton
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/TextFields";
@@ -21,6 +24,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
 
 import LogdetailLinkField from "./LogdetailLinkField";
 import LinkedTo from "./LinkedTo";
@@ -56,8 +60,31 @@ const colored = WrappedComponent => {
 export const ColoredNumberField = colored(NumberField);
 ColoredNumberField.defaultProps = NumberField.defaultProps;
 
+const exporter = (records, fetchRelatedRecords) => {
+  const data = records.map(record => {
+    return {
+      ...record,
+      log_details: JSON.stringify(record.logdetails)
+    };
+  });
+  const fields = [
+    "id",
+    "apiname",
+    "appname",
+    "result",
+    "start",
+    "end",
+    "details",
+    "response",
+    "log_details"
+  ];
+  downloadCSV(convertToCSV({ data, fields }), "logs");
+};
+// fetchRelatedRecords(records, "id", "logs").then(posts => {});
+
 const LogActions = ({
   bulkActions,
+  currentSort,
   basePath,
   displayedFilters,
   filters,
@@ -85,6 +112,12 @@ const LogActions = ({
         context: "button"
       })}
     <RefreshButton />
+    <ExportButton
+      resource={resource}
+      sort={currentSort}
+      filter={filterValues}
+      exporter={exporter}
+    />
   </CardActions>
 );
 
@@ -110,7 +143,7 @@ export const LogList = props => (
     sort={{ field: "id", order: "DESC" }}
     perPage={25}
     actions={<LogActions />}
-    bulkActionButtons={false}
+    bulkActionButtons={hasRole("sysAdmin") ? <BulkDeleteButton /> : false}
   >
     <Datagrid>
       <TextField label="ID" source="id" />
@@ -177,8 +210,6 @@ const styles = theme => ({
 
 const MyList = withStyles(styles)(({ classes, ...props }) => {
   console.log("mylist");
-
-  console.log(props);
 
   return (
     <Paper className={classes.root}>

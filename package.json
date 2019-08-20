@@ -10,6 +10,7 @@
     "json-graphql-server": "~2.1.1",
     "material-table": "^1.17.0",
     "mime": "^2.3.1",
+    "papaparse": "^5.0.2",
     "ra-data-fakerest": "^2.4.0",
     "ra-data-graphql-simple": "^2.0.0",
     "ra-data-simple-rest": "~2.0.0",
