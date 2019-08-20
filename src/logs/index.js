@@ -23,6 +23,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
 import LogdetailLinkField from "./LogdetailLinkField";
+import LinkedTo from "./LinkedTo";
 
 export const LogIcon = Icon;
 
@@ -114,6 +115,7 @@ export const LogList = props => (
     <Datagrid>
       <TextField label="ID" source="id" />
       <TextField label="接口" source="apiname" />
+      <LinkedTo label="接口信息" source="apiname" />
       <TextField label="发起调用的APP" source="appname" />
       <TextField label="成功/失败" source="result" />
       {/* <DateField label="开始调用时间" source="start" type="date" showTime /> */}
