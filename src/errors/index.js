@@ -28,24 +28,24 @@ const hasRole = arg => {
   return roles.indexOf(arg) > -1;
 };
 
-// const exporter = (records, fetchRelatedRecords) => {
-//   fetchRelatedRecords(records, "ids", "logs").then(logs => {
-//     const data = records.map(record => ({
-//       ...record,
-//       details_logs: JSON.stringify(logs[record.id])
-//     }));
-//     const csv = convertToCSV({
-//       data,
-//       fields: ["id", "apiname", "appname", "end", "details", "response"]
-//     });
-//     downloadCSV(csv, "errors");
-//   });
-// };
 const exporter = (records, fetchRelatedRecords) => {
-  const data = records;
-  const fields = ["id", "apiname", "appname", "error", "time"];
-  downloadCSV(convertToCSV({ data, fields }), "errors");
+  fetchRelatedRecords(records, "id", "logs").then(logs => {
+    const data = records.map(record => ({
+      ...record,
+      details_logs: JSON.stringify(logs[record.id])
+    }));
+    const csv = convertToCSV({
+      data,
+      fields: ["logid", "apiname", "appname", "error", "time", "details_logs"]
+    });
+    downloadCSV(csv, "errors");
+  });
 };
+// const exporter = (records, fetchRelatedRecords) => {
+//   const data = records;
+//   const fields = ["id", "apiname", "appname", "error", "time"];
+//   downloadCSV(convertToCSV({ data, fields }), "errors");
+// };
 
 const ErrorFilter = props => (
   <Filter {...props}>
