@@ -14,6 +14,7 @@ import { withStyles } from "@material-ui/core/styles";
 import LockIcon from "@material-ui/icons/Lock";
 
 import { Notification, translate, userLogin } from "react-admin";
+import Background from "./home.png";
 
 const styles = theme => ({
   main: {
@@ -22,7 +23,6 @@ const styles = theme => ({
     minHeight: "100vh",
     alignItems: "center",
     justifyContent: "flex-start",
-    backgroundImage: "url('home.jpeg')",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"
   },
@@ -55,6 +55,14 @@ const styles = theme => ({
   }
 });
 
+const sectionStyle = {
+  width: "100%",
+  // height: "800px",
+  // makesure here is String确保这里是一个字符串，以下是es6写法
+  backgroundImage: `url(${Background})`,
+  backgroundSize: "cover"
+};
+
 // see http://redux-form.com/6.4.3/examples/material-ui/
 const renderInput = ({
   meta: { touched, error } = {},
@@ -80,50 +88,53 @@ class Login extends Component {
   render() {
     const { classes, handleSubmit, isLoading, translate } = this.props;
     return (
-      <div className={classes.main}>
-        <Card className={classes.card}>
-          <div className={classes.avatar}>
-            <Avatar className={classes.icon}>
-              <LockIcon />
-            </Avatar>
-          </div>
-          <form onSubmit={handleSubmit(this.login)}>
-            <div className={classes.hint}>故宫服务集成平台</div>
-            <div className={classes.form}>
-              <div className={classes.input}>
-                <Field
-                  name="username"
-                  component={renderInput}
-                  label={translate("ra.auth.username")}
-                  disabled={isLoading}
-                />
-              </div>
-              <div className={classes.input}>
-                <Field
-                  name="password"
-                  component={renderInput}
-                  label={translate("ra.auth.password")}
-                  type="password"
-                  disabled={isLoading}
-                />
-              </div>
+      <div style={sectionStyle}>
+        <div className={classes.main}>
+          {/* <img src={Background} style={{ width: "100%", height: "100%" }} /> */}
+          <Card className={classes.card}>
+            <div className={classes.avatar}>
+              <Avatar className={classes.icon}>
+                <LockIcon />
+              </Avatar>
             </div>
-            <CardActions className={classes.actions}>
-              <Button
-                variant="raised"
-                type="submit"
-                color="primary"
-                disabled={isLoading}
-                className={classes.button}
-                fullWidth
-              >
-                {isLoading && <CircularProgress size={25} thickness={2} />}
-                {translate("ra.auth.sign_in")}
-              </Button>
-            </CardActions>
-          </form>
-        </Card>
-        <Notification />
+            <form onSubmit={handleSubmit(this.login)}>
+              <div className={classes.hint}>故宫服务集成平台</div>
+              <div className={classes.form}>
+                <div className={classes.input}>
+                  <Field
+                    name="username"
+                    component={renderInput}
+                    label={translate("ra.auth.username")}
+                    disabled={isLoading}
+                  />
+                </div>
+                <div className={classes.input}>
+                  <Field
+                    name="password"
+                    component={renderInput}
+                    label={translate("ra.auth.password")}
+                    type="password"
+                    disabled={isLoading}
+                  />
+                </div>
+              </div>
+              <CardActions className={classes.actions}>
+                <Button
+                  variant="raised"
+                  type="submit"
+                  color="primary"
+                  disabled={isLoading}
+                  className={classes.button}
+                  fullWidth
+                >
+                  {isLoading && <CircularProgress size={25} thickness={2} />}
+                  {translate("ra.auth.sign_in")}
+                </Button>
+              </CardActions>
+            </form>
+          </Card>
+          <Notification />
+        </div>
       </div>
     );
   }
