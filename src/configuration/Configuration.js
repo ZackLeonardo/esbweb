@@ -32,7 +32,7 @@ class Configuration extends React.Component {
       let password = md5(this.state.oldPasswd);
       let newpassword = md5(this.state.newPasswd1);
       const request = new Request(
-        "http://esb.dpm.org.cn:8080/esb/updatepassword",
+        "http://esbbak.dpm.org.cn:8080/esb/updatepassword",
         {
           method: "POST",
           body: JSON.stringify({ password, newpassword }),

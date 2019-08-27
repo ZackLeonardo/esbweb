@@ -10,7 +10,7 @@ import md5 from "./md5";
 export default (type, params) => {
   if (type === AUTH_LOGIN) {
     let { username, password } = params;
-    const request = new Request("http://esb.dpm.org.cn:8080/esb/login", {
+    const request = new Request("http://esbbak.dpm.org.cn:8080/esb/login", {
       method: "POST",
       body: JSON.stringify({ username: username, password: md5(password) }),
       headers: new Headers({ "Content-Type": "application/json" })
