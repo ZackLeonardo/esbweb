@@ -51,7 +51,6 @@ title: "Reference"
 * [`<ImageField>`](./Fields.md#imagefield)
 * [`<ImageInput>`](./Inputs.md#imageinput)
 * [`<ImageInputPreview>`](./Inputs.md#imageinput)
-* [`<FunctionField>`](./Fields.md#functionfield)
 * `<Labeled>`
 * [`<Layout>`](./Theming.md#using-a-custom-layout)
 * [`<Loading>`](./Theming.md#Loading)
@@ -66,6 +65,7 @@ title: "Reference"
 * [`<Pagination>`](./List.md#pagination)
 * [`<RadioButtonGroupInput>`](./Inputs.md#radiobuttongroupinput)
 * [`<ReferenceArrayField>`](./Fields.md#referencearrayfield)
+* [`<ReferenceArrayInput>`](./Inputs.md#referencearrayinput)
 * [`<ReferenceField>`](./Fields.md#referencefield)
 * [`<ReferenceInput>`](./Inputs.md#referenceinput)
 * [`<ReferenceManyField>`](./Fields.md#referencemanyfield)

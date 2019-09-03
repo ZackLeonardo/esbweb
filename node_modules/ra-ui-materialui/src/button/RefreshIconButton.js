@@ -13,15 +13,22 @@ class RefreshButton extends Component {
         label: PropTypes.string,
         refreshView: PropTypes.func.isRequired,
         translate: PropTypes.func.isRequired,
+        icon: PropTypes.element,
     };
 
     static defaultProps = {
         label: 'ra.action.refresh',
+        icon: <NavigationRefresh />,
     };
 
     handleClick = event => {
+        const { refreshView, onClick } = this.props;
         event.preventDefault();
-        this.props.refreshView();
+        refreshView();
+
+        if (typeof onClick === 'function') {
+            onClick();
+        }
     };
 
     render() {
@@ -30,6 +37,7 @@ class RefreshButton extends Component {
             label,
             refreshView,
             translate,
+            icon,
             ...rest
         } = this.props;
 
@@ -42,7 +50,7 @@ class RefreshButton extends Component {
                     onClick={this.handleClick}
                     {...rest}
                 >
-                    <NavigationRefresh />
+                    {icon}
                 </IconButton>
             </Tooltip>
         );

@@ -26,13 +26,13 @@ import { ErrorList, ErrorIcon } from "./errors";
 import dataProviderFactory from "./dataProvider";
 
 const i18nProvider = locale => {
-  if (locale === "fr") {
-    return import("./i18n/fr").then(messages => messages.default);
-  }
+  // if (locale === "fr") {
+  //   return import("./i18n/fr").then(messages => messages.default);
+  // }
 
-  if (locale === "en") {
-    return import("./i18n/en").then(messages => messages.default);
-  }
+  // if (locale === "en") {
+  //   return import("./i18n/en").then(messages => messages.default);
+  // }
 
   // Always fallback on english
   return chineseMessages;

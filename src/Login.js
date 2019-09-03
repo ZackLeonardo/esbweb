@@ -15,6 +15,7 @@ import LockIcon from "@material-ui/icons/Lock";
 
 import { Notification, translate, userLogin } from "react-admin";
 import Background from "./home.png";
+import Logowhite from "./icons/logowhite.png";
 
 const styles = theme => ({
   main: {
@@ -27,8 +28,8 @@ const styles = theme => ({
     backgroundSize: "cover"
   },
   card: {
-    minWidth: 300,
-    marginTop: "6em"
+    minWidth: 400,
+    marginTop: "8em"
   },
   avatar: {
     margin: "1em",
@@ -36,13 +37,17 @@ const styles = theme => ({
     justifyContent: "center"
   },
   icon: {
+    width: 180,
+    height: 180,
+    // borderRadius: 0
     backgroundColor: theme.palette.secondary.main
   },
   hint: {
     marginTop: "1em",
     display: "flex",
     justifyContent: "center",
-    color: theme.palette.grey[500]
+    color: theme.palette.grey[900],
+    fontSize: 30
   },
   form: {
     padding: "0 1em 1em 1em"
@@ -94,7 +99,9 @@ class Login extends Component {
           <Card className={classes.card}>
             <div className={classes.avatar}>
               <Avatar className={classes.icon}>
-                <LockIcon />
+                {/* <LockIcon /> */}
+                {/* <img src={} alt="" className={classes.img} /> */}
+                <img src={Logowhite} width="100" height="100" />
               </Avatar>
             </div>
             <form onSubmit={handleSubmit(this.login)}>

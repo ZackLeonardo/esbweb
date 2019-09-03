@@ -148,7 +148,7 @@ export const LogList = props => (
     <Datagrid>
       <TextField label="ID" source="id" />
       <TextField label="接口" source="apiname" />
-      <LinkedTo label="接口信息" source="apiname" />
+      <LinkedTo label="接口信息" source="apiid" />
       <TextField label="发起调用的APP" source="appname" />
       <TextField label="成功/失败" source="result" />
       {/* <DateField label="开始调用时间" source="start" type="date" showTime /> */}
