@@ -16,7 +16,9 @@ import {
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Error";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import Button from "@material-ui/core/Button";
 
+import dataProviderFactory from "../dataProvider";
 import MobileGrid from "./MobileGrid";
 import ErrorDetailLinkField from "./ErrorDetailLinkField";
 import LinkedTo from "./LinkedTo";
@@ -28,16 +30,50 @@ const hasRole = arg => {
   return roles.indexOf(arg) > -1;
 };
 
+const fields = [
+  "id",
+  "apiname",
+  "appname",
+  "result",
+  "start",
+  "end",
+  "details",
+  "args",
+  "response",
+  "log_details"
+];
+
+const dataH = [
+  {
+    id: "日志id",
+    apiname: "api名称",
+    appname: "发起调用的app",
+    result: "结果",
+    start: "开始时间",
+    end: "结束时间",
+    details: "错误信息",
+    args: "输入参数",
+    response: "返回结果",
+    log_details: "详细日志"
+  }
+];
+
 const exporter = (records, fetchRelatedRecords) => {
   fetchRelatedRecords(records, "id", "logs").then(logs => {
     const data = records.map(record => ({
       ...record,
-      details_logs: JSON.stringify(logs[record.id])
+      ...logs[record.id],
+      log_details: JSON.stringify(logs[record.id].logdetails)
     }));
-    const csv = convertToCSV({
-      data,
-      fields: ["logid", "apiname", "appname", "error", "time", "details_logs"]
-    });
+    const convertedData = dataH.concat(data);
+    const csv = convertToCSV(
+      {
+        data: convertedData,
+        fields
+        // fields: ["logid", "apiname", "appname", "error", "time", "details_logs"]
+      },
+      { header: false }
+    );
     downloadCSV(csv, "errors");
   });
 };
@@ -46,6 +82,33 @@ const exporter = (records, fetchRelatedRecords) => {
 //   const fields = ["id", "apiname", "appname", "error", "time"];
 //   downloadCSV(convertToCSV({ data, fields }), "errors");
 // };
+const bulkExporter = props => {
+  // console.log(props);
+
+  dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
+    //process.env.REACT_APP_DATA_PROVIDER
+    dataProvider => {
+      dataProvider("GET_MANY", "logs", {
+        ids: props.selectedIds
+      })
+        .then(response => response.data)
+        .then(records => {
+          const data = records.map(record => {
+            return {
+              ...record,
+              log_details: JSON.stringify(record.logdetails)
+            };
+          });
+
+          const convertedData = dataH.concat(data);
+          downloadCSV(
+            convertToCSV({ data: convertedData, fields }, { header: false }),
+            "errors"
+          );
+        });
+    }
+  );
+};
 
 const ErrorFilter = props => (
   <Filter {...props}>
@@ -114,6 +177,29 @@ const ErrorActions = ({
   </CardActions>
 );
 
+const buttonStyles = theme => ({
+  button: {
+    marginLeft: 10,
+    minWidth: 70
+    // backgroundColor: "red"
+  }
+});
+
+const MyBulkActions = withStyles(buttonStyles)(({ classes, ...props }) => (
+  <CardActions>
+    <BulkDeleteButton {...props} />
+    <Button
+      variant="raised"
+      color="primary"
+      // disabled={}
+      className={classes.button}
+      onClick={() => bulkExporter(props)}
+    >
+      导出选中
+    </Button>
+  </CardActions>
+));
+
 export const ErrorList = props => (
   <List
     {...props}
@@ -121,13 +207,15 @@ export const ErrorList = props => (
     sort={{ field: "id", order: "DESC" }}
     perPage={25}
     actions={<ErrorActions />}
-    bulkActionButtons={hasRole("sysAdmin") ? <BulkDeleteButton /> : false}
+    bulkActionButtons={
+      hasRole("sysAdmin") ? <MyBulkActions {...props} /> : false
+    }
   >
     <Responsive
       xsmall={<MobileGrid />}
       medium={
         <Datagrid>
-          <TextField label="ID" source="id" />
+          <TextField label="日志ID" source="id" />
           <TextField label="接口名称" source="apiname" />
           <LinkedTo label="接口信息" source="apiname" />
           <TextField label="发起调用应用系统" source="appname" />

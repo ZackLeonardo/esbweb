@@ -23,11 +23,13 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 
 import LogdetailLinkField from "./LogdetailLinkField";
 import LinkedTo from "./LinkedTo";
+import dataProviderFactory from "../dataProvider";
 
 export const LogIcon = Icon;
 
@@ -60,6 +62,34 @@ const colored = WrappedComponent => {
 export const ColoredNumberField = colored(NumberField);
 ColoredNumberField.defaultProps = NumberField.defaultProps;
 
+const fields = [
+  "id",
+  "apiname",
+  "appname",
+  "result",
+  "start",
+  "end",
+  "details",
+  "args",
+  "response",
+  "log_details"
+];
+
+const dataH = [
+  {
+    id: "日志id",
+    apiname: "api名称",
+    appname: "发起调用的app",
+    result: "结果",
+    start: "开始时间",
+    end: "结束时间",
+    details: "错误信息",
+    args: "输入参数",
+    response: "返回结果",
+    log_details: "详细日志"
+  }
+];
+
 const exporter = (records, fetchRelatedRecords) => {
   const data = records.map(record => {
     return {
@@ -67,20 +97,38 @@ const exporter = (records, fetchRelatedRecords) => {
       log_details: JSON.stringify(record.logdetails)
     };
   });
-  const fields = [
-    "id",
-    "apiname",
-    "appname",
-    "result",
-    "start",
-    "end",
-    "details",
-    "response",
-    "log_details"
-  ];
-  downloadCSV(convertToCSV({ data, fields }), "logs");
+
+  const convertedData = dataH.concat(data);
+  downloadCSV(
+    convertToCSV({ data: convertedData, fields }, { header: false }),
+    "logs"
+  );
 };
 // fetchRelatedRecords(records, "id", "logs").then(posts => {});
+const bulkExporter = props => {
+  dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
+    //process.env.REACT_APP_DATA_PROVIDER
+    dataProvider => {
+      dataProvider("GET_MANY", "logs", {
+        ids: props.selectedIds
+      })
+        .then(response => response.data)
+        .then(records => {
+          const data = records.map(record => {
+            return {
+              ...record,
+              log_details: JSON.stringify(record.logdetails)
+            };
+          });
+          const convertedData = dataH.concat(data);
+          downloadCSV(
+            convertToCSV({ data: convertedData, fields }, { header: false }),
+            "logs"
+          );
+        });
+    }
+  );
+};
 
 const LogActions = ({
   bulkActions,
@@ -136,6 +184,29 @@ const MySpendTextField = props => {
   return "--";
 };
 
+const buttonStyles = theme => ({
+  button: {
+    marginLeft: 10,
+    minWidth: 70
+    // backgroundColor: "red"
+  }
+});
+
+const MyBulkActions = withStyles(buttonStyles)(({ classes, ...props }) => (
+  <CardActions>
+    <BulkDeleteButton {...props} />
+    <Button
+      variant="raised"
+      color="primary"
+      // disabled={}
+      className={classes.button}
+      onClick={() => bulkExporter(props)}
+    >
+      导出选中
+    </Button>
+  </CardActions>
+));
+
 export const LogList = props => (
   <List
     {...props}
@@ -143,7 +214,9 @@ export const LogList = props => (
     sort={{ field: "id", order: "DESC" }}
     perPage={25}
     actions={<LogActions />}
-    bulkActionButtons={hasRole("sysAdmin") ? <BulkDeleteButton /> : false}
+    bulkActionButtons={
+      hasRole("sysAdmin") ? <MyBulkActions {...props} /> : false
+    } //BulkDeleteButton
   >
     <Datagrid>
       <TextField label="ID" source="id" />
