@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import SettingsIcon from "@material-ui/icons/Settings";
 import { withStyles } from "@material-ui/core/styles";
 
-import Logored from "./icons/logored.png";
+import Logored from "./icons/logo.png";
 
 const styles = {
   title: {
@@ -47,7 +47,7 @@ const CustomAppBar = ({ classes, ...props }) => (
       className={classes.title}
       id="react-admin-title"
     />
-    <img src={Logored} height="40" />
+    <img src={Logored} height="22" style={{ marginRight: 5 }} />
     <span className={classes.logo}>故宫服务集成平台</span>
   </AppBar>
   // <AppBar {...props} userMenu={<CustomUserMenu />} />

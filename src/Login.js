@@ -14,8 +14,8 @@ import { withStyles } from "@material-ui/core/styles";
 import LockIcon from "@material-ui/icons/Lock";
 
 import { Notification, translate, userLogin } from "react-admin";
-import Background from "./home.png";
-import Logowhite from "./icons/logowhite.png";
+import Background from "./home.jpg";
+import Logowhite from "./icons/logored.png";
 
 const styles = theme => ({
   main: {
@@ -33,21 +33,22 @@ const styles = theme => ({
   },
   avatar: {
     margin: "1em",
+    marginBottom: "-2em",
     display: "flex",
     justifyContent: "center"
   },
   icon: {
-    width: 180,
-    height: 180,
+    width: 200,
+    height: 200,
     // borderRadius: 0
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: "transparent"
   },
   hint: {
-    marginTop: "1em",
+    // marginTop: "1em",
     display: "flex",
     justifyContent: "center",
     color: theme.palette.grey[900],
-    fontSize: 30
+    fontSize: 25
   },
   form: {
     padding: "0 1em 1em 1em"
@@ -56,7 +57,7 @@ const styles = theme => ({
     marginTop: "1em"
   },
   actions: {
-    padding: "0 1em 1em 1em"
+    padding: "0 1em 2em 1em"
   }
 });
 
@@ -101,7 +102,7 @@ class Login extends Component {
               <Avatar className={classes.icon}>
                 {/* <LockIcon /> */}
                 {/* <img src={} alt="" className={classes.img} /> */}
-                <img src={Logowhite} width="100" height="100" />
+                <img src={Logowhite} width="300" />
               </Avatar>
             </div>
             <form onSubmit={handleSubmit(this.login)}>
