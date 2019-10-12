@@ -11,7 +11,8 @@ import {
   RefreshButton,
   BulkDeleteButton,
   downloadCSV,
-  ExportButton
+  ExportButton,
+  DateInput
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/Error";
@@ -113,6 +114,8 @@ const bulkExporter = props => {
 const ErrorFilter = props => (
   <Filter {...props}>
     <SearchInput source="q" alwaysOn />
+    <DateInput label="开始日期" source="date_gte" alwaysOn />
+    <DateInput label="结束日期" source="date_lte" alwaysOn />
   </Filter>
 );
 

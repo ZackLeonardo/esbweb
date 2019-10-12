@@ -14,7 +14,8 @@ import {
   RichTextField,
   BulkDeleteButton,
   downloadCSV,
-  ExportButton
+  ExportButton,
+  DateInput
 } from "react-admin";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/icons/TextFields";
@@ -26,6 +27,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import shallowEqual from "shallowequal";
 
 import LogdetailLinkField from "./LogdetailLinkField";
 import LinkedTo from "./LinkedTo";
@@ -41,6 +43,8 @@ const hasRole = arg => {
 const LogFilter = props => (
   <Filter {...props}>
     <SearchInput source="q" alwaysOn />
+    <DateInput label="开始日期" source="date_gte" alwaysOn />
+    <DateInput label="结束日期" source="date_lte" alwaysOn />
   </Filter>
 );
 
@@ -281,33 +285,66 @@ const styles = theme => ({
   }
 });
 
-const MyList = withStyles(styles)(({ classes, ...props }) => {
-  console.log("mylist");
+class MyList extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-  return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell align="right">事件</TableCell>
-            <TableCell align="right">结束时间</TableCell>
-            <TableCell align="right">结果</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {props.record.logdetails.map(row => (
-            <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                {row.id}
-              </TableCell>
-              <TableCell align="right">{row.event}</TableCell>
-              <TableCell align="right">{row.time}</TableCell>
-              <TableCell align="right">{row.result}</TableCell>
+    this.state = {
+      myLogdetails: []
+    };
+  }
+
+  componentWillMount() {
+    //根据id获取详细日志
+    dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER).then(
+      //process.env.REACT_APP_DATA_PROVIDER
+      dataProvider => {
+        dataProvider("GET_MANY", "logs", {
+          ids: [this.props.record.id]
+        })
+          .then(response => response.data)
+          .then(records => {
+            const logDetails = records.map(record => {
+              return record.logdetails;
+            });
+            this.setState({
+              myLogdetails: logDetails[0]
+            });
+          });
+      }
+    );
+  }
+
+  render() {
+    // console.log(this.state.myLogdetails);
+
+    return (
+      // <Paper className={classes.root}>
+      //   <Table className={classes.table}>
+      <Paper>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell align="right">事件</TableCell>
+              <TableCell align="right">结束时间</TableCell>
+              <TableCell align="right">结果</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
-  );
-});
+          </TableHead>
+          <TableBody>
+            {this.state.myLogdetails.map(row => (
+              <TableRow key={row.id}>
+                <TableCell component="th" scope="row">
+                  {row.id}
+                </TableCell>
+                <TableCell align="right">{row.event}</TableCell>
+                <TableCell align="right">{row.time}</TableCell>
+                <TableCell align="right">{row.result}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Paper>
+    );
+  }
+}
