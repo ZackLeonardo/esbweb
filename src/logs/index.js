@@ -32,6 +32,7 @@ import shallowEqual from "shallowequal";
 import LogdetailLinkField from "./LogdetailLinkField";
 import LinkedTo from "./LinkedTo";
 import dataProviderFactory from "../dataProvider";
+import HistorySegmentInput from "./HistorySegmentInput";
 
 export const LogIcon = Icon;
 
@@ -45,6 +46,7 @@ const LogFilter = props => (
     <SearchInput source="q" alwaysOn />
     <DateInput label="开始日期" source="date_gte" alwaysOn />
     <DateInput label="结束日期" source="date_lte" alwaysOn />
+    <HistorySegmentInput alwaysOn />
   </Filter>
 );
 

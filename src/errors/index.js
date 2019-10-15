@@ -23,6 +23,7 @@ import dataProviderFactory from "../dataProvider";
 import MobileGrid from "./MobileGrid";
 import ErrorDetailLinkField from "./ErrorDetailLinkField";
 import LinkedTo from "./LinkedTo";
+import HistorySegmentInput from "./HistorySegmentInput";
 
 export const ErrorIcon = Icon;
 
@@ -116,6 +117,7 @@ const ErrorFilter = props => (
     <SearchInput source="q" alwaysOn />
     <DateInput label="开始日期" source="date_gte" alwaysOn />
     <DateInput label="结束日期" source="date_lte" alwaysOn />
+    <HistorySegmentInput alwaysOn />
   </Filter>
 );
 
@@ -224,7 +226,11 @@ export const ErrorList = props => (
           <TextField label="发起调用应用系统" source="appname" />
           <TextField label="异常情况" source="error" />
           <TextField label="异常时间" source="time" />
-          <ErrorDetailLinkField label="查看日志信息" source="logid" />
+          <ErrorDetailLinkField
+            label="查看日志信息"
+            source="logid"
+            location={props.location.search}
+          />
         </Datagrid>
       }
     />
